@@ -1,8 +1,19 @@
-// next.config.mjs (ES Module syntax)
+// next.config.mjs
 const nextConfig = {
-  // Your Next.js configuration options here
   images: {
-    domains: ["localhost", "res.cloudinary.com"],
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "1337",
+        pathname: "/uploads/**",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
+      },
+    ],
   },
 };
 

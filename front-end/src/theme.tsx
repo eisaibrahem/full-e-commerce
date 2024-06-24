@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { createContext, useState, useMemo } from "react";
+import React, { createContext, useState, useMemo, useEffect } from "react";
 import { createTheme } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 
@@ -16,7 +15,6 @@ export const getDesignTokens = (mode: any) => ({
           neutral: {
             main: "#64748B",
           },
-
           favColor: {
             main: grey[300],
           },
@@ -35,7 +33,6 @@ export const getDesignTokens = (mode: any) => ({
           backgroundSelector: {
             main: "#252b32",
           },
-
           favColor: {
             main: grey[800],
           },
@@ -55,20 +52,29 @@ export const ColorModeContext = createContext({
 });
 
 export const useMode = () => {
-  const [mode, setMode] = useState(
-    window.localStorage.getItem("mode")
-      ? window.localStorage.getItem("mode")
-      : "light"
-  );
+  const [mode, setMode] = useState("light");
+
+  useEffect(() => {
+    const savedMode = window.localStorage.getItem("mode");
+    if (savedMode) {
+      setMode(savedMode);
+    }
+  }, []);
 
   const colorMode = useMemo(
     () => ({
-      toggleColorMode: () =>
-        setMode((prev) => (prev === "light" ? "dark" : "light")),
+      toggleColorMode: () => {
+        setMode((prev) => (prev === "light" ? "dark" : "light"));
+        window.localStorage.setItem(
+          "mode",
+          mode === "light" ? "dark" : "light"
+        );
+      },
     }),
-    []
+    [mode]
   );
 
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-  return [theme, colorMode];
+
+  return [theme, colorMode] as const;
 };
