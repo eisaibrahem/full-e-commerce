@@ -1,5 +1,5 @@
 "use client";
-import Typography from "@mui/material/Typography";
+import React from "react";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "../../theme";
 import Header from "../Components/header/Header";
@@ -13,8 +13,8 @@ import { store } from "@/Redux/store";
 export default function Home() {
   const [theme, colorMode] = useMode();
   return (
-    <ColorModeContext.Provider value={colorMode as any}>
-      <ThemeProvider theme={theme as any}>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <Provider store={store}>
           <Box>

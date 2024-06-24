@@ -2,13 +2,13 @@
 import React, { createContext, useState, useMemo, useEffect } from "react";
 import { createTheme } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
+import { PaletteMode } from "@mui/material";
 
-export const getDesignTokens = (mode: any) => ({
+const getDesignTokens = (mode: PaletteMode) => ({
   palette: {
     mode,
     ...(mode === "light"
       ? {
-          // palette values for light mode
           text: {
             primary: "#2B3445",
           },
@@ -26,7 +26,6 @@ export const getDesignTokens = (mode: any) => ({
           },
         }
       : {
-          // palette values for dark mode
           neutral: {
             main: "#64748B",
           },
@@ -46,27 +45,25 @@ export const getDesignTokens = (mode: any) => ({
   },
 });
 
-// context for color mode
 export const ColorModeContext = createContext({
   toggleColorMode: () => {},
 });
 
 export const useMode = () => {
-  const [mode, setMode] = useState(
-    localStorage.getItem("mode") ? localStorage.getItem("mode") : "light"
-  );
+  const initialMode = (localStorage.getItem("mode") as PaletteMode) || "light";
+  const [mode, setMode] = useState<PaletteMode>(initialMode);
+
+  useEffect(() => {
+    localStorage.setItem("mode", mode);
+  }, [mode]);
 
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prev) => (prev === "light" ? "dark" : "light"));
-        window.localStorage.setItem(
-          "mode",
-          mode === "light" ? "dark" : "light"
-        );
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
       },
     }),
-    [mode]
+    []
   );
 
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
