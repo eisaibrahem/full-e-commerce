@@ -1,6 +1,6 @@
 "use client";
 import { AddShoppingCartOutlined } from "@mui/icons-material";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Skeleton, Stack, Typography } from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Image from "next/image";
@@ -15,10 +15,6 @@ export default function ProductsDetails({ clickedProduct, myDate }: any) {
 
   return error ? (
     <>{error}</>
-  ) : isLoading ? (
-    <>
-      <Loading />
-    </>
   ) : (
     data && (
       <Box
@@ -36,13 +32,23 @@ export default function ProductsDetails({ clickedProduct, myDate }: any) {
             display: "flex",
           }}
         >
-          <Image
-            width={360}
-            height={360}
-            className="dialog-img"
-            src={` ${clickedProduct.attributes.productImage.data[selectedImg].attributes.url}`}
-            alt=""
-          />
+          {isLoading ? (
+            <Skeleton
+              sx={{ borderRadius: "5px" }}
+              animation="wave"
+              variant="rectangular"
+              width={300}
+              height={250}
+            />
+          ) : (
+            <Image
+              width={360}
+              height={360}
+              className="dialog-img"
+              src={`${clickedProduct.attributes.productImage.data[selectedImg].attributes.url}`}
+              alt=""
+            />
+          )}
         </Box>
 
         <Box
@@ -67,13 +73,12 @@ export default function ProductsDetails({ clickedProduct, myDate }: any) {
               justifyContent: {
                 xs: "center",
                 sm: "left",
-
-                overflow: "auto",
               },
+              overflow: "auto",
             }}
             direction={"row"}
             gap={1}
-            my={2}
+            my={1.5}
           >
             <ToggleButtonGroup
               value={selectedImg}
@@ -85,6 +90,7 @@ export default function ProductsDetails({ clickedProduct, myDate }: any) {
                   opacity: "1",
                   backgroundColor: "initial",
                   overflow: "auto",
+                  mb: 0.8,
                 },
               }}
             >
