@@ -2,7 +2,7 @@
 const nextConfig = {
   // Your Next.js configuration options here
   images: {
-    domains: ["localhost"],
+    domains: ["localhost", "res.cloudinary.com"],
   },
 };
 

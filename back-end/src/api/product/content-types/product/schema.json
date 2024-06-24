@@ -4,7 +4,8 @@
   "info": {
     "singularName": "product",
     "pluralName": "products",
-    "displayName": "product"
+    "displayName": "product",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,22 +13,19 @@
   "pluginOptions": {},
   "attributes": {
     "productImage": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
-    },
-    "productTitle": {
-      "type": "string",
-      "required": true
-    },
-    "productPrice": {
-      "required": true,
-      "type": "decimal"
+      ]
     },
     "productDesc": {
       "type": "text",
+      "required": true
+    },
+    "productPrice": {
+      "type": "decimal",
       "required": true
     },
     "productRatting": {
@@ -40,6 +38,10 @@
         "men",
         "women"
       ],
+      "required": true
+    },
+    "productTitle": {
+      "type": "string",
       "required": true
     }
   }

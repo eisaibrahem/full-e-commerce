@@ -72,7 +72,7 @@ export default function MainProducts({
               >
                 <CardMedia
                   sx={{ height: 277 }}
-                  image={`${baseUrlImage}${item.attributes.productImage.data[0].attributes.url}`}
+                  image={`${item.attributes.productImage.data[0].attributes.url}`}
                   title="green iguana"
                 />
 

@@ -34,7 +34,7 @@ export default function ProductsDetails({ clickedProduct, myDate }: any) {
           <Image
             width={360}
             height={360}
-            src={` ${baseUrlImage}${clickedProduct.attributes.productImage.data[selectedImg].attributes.url}`}
+            src={` ${clickedProduct.attributes.productImage.data[selectedImg].attributes.url}`}
             alt=""
           />
         </Box>
@@ -93,7 +93,7 @@ export default function ProductsDetails({ clickedProduct, myDate }: any) {
                         }}
                         height={500}
                         width={500}
-                        src={`${baseUrlImage}${item.attributes.url}`}
+                        src={`${item.attributes.url}`}
                         alt=""
                       />
                     </ToggleButton>
