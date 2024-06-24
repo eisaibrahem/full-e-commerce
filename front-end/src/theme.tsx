@@ -50,11 +50,21 @@ export const ColorModeContext = createContext({
 });
 
 export const useMode = () => {
-  const initialMode = (localStorage.getItem("mode") as PaletteMode) || "light";
-  const [mode, setMode] = useState<PaletteMode>(initialMode);
+  const [mode, setMode] = useState<PaletteMode>("light");
 
   useEffect(() => {
-    localStorage.setItem("mode", mode);
+    if (typeof window !== "undefined") {
+      const storedMode = localStorage.getItem("mode") as PaletteMode;
+      if (storedMode) {
+        setMode(storedMode);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("mode", mode);
+    }
   }, [mode]);
 
   const colorMode = useMemo(
