@@ -58,6 +58,8 @@ export default function FilterProducts({ myDate, setmyDate }: any) {
         onChange={handleAlignment}
         aria-label="text alignment"
         sx={{
+          flexWrap: "wrap",
+          gap: 2,
           ".Mui-selected": {
             border: "1px solid rgba(233, 69, 96, 0.5) !important",
             color: "#e94560",
@@ -75,7 +77,7 @@ export default function FilterProducts({ myDate, setmyDate }: any) {
         </ToggleButton>
 
         <ToggleButton
-          sx={{ mx: "16px !important", color: theme.palette.text.primary }}
+          sx={{ color: theme.palette.text.primary }}
           className="myButton"
           value={menCategoryAPI}
           aria-label="centered"

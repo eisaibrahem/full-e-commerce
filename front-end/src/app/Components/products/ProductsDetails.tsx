@@ -26,20 +26,32 @@ export default function ProductsDetails({ clickedProduct, myDate }: any) {
           p: 2,
           display: "flex",
           alignItems: "center",
-          gap: 2.5,
-          flexDirection: { xs: "column", sm: "row" },
+          justifyContent: "space-between",
+          gap: 2,
+          flexDirection: { xs: "column", md: "row" },
         }}
       >
-        <Box sx={{ display: "flex" }}>
+        <Box
+          sx={{
+            display: "flex",
+          }}
+        >
           <Image
             width={360}
             height={360}
+            className="dialog-img"
             src={` ${clickedProduct.attributes.productImage.data[selectedImg].attributes.url}`}
             alt=""
           />
         </Box>
 
-        <Box sx={{ py: 2, textAlign: { xs: "center", sm: "left" } }}>
+        <Box
+          sx={{
+            py: 2,
+            textAlign: { xs: "center", sm: "left" },
+            width: { xs: "100%", md: "50%" },
+          }}
+        >
           <Typography variant="h5">
             {clickedProduct.attributes.productTitle}
           </Typography>
@@ -51,7 +63,14 @@ export default function ProductsDetails({ clickedProduct, myDate }: any) {
           </Typography>
 
           <Stack
-            sx={{ justifyContent: { xs: "center", sm: "left" } }}
+            sx={{
+              justifyContent: {
+                xs: "center",
+                sm: "left",
+
+                overflow: "auto",
+              },
+            }}
             direction={"row"}
             gap={1}
             my={2}
@@ -65,6 +84,7 @@ export default function ProductsDetails({ clickedProduct, myDate }: any) {
                   borderRadius: "5px !important",
                   opacity: "1",
                   backgroundColor: "initial",
+                  overflow: "auto",
                 },
               }}
             >

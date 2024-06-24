@@ -30,7 +30,10 @@ export default function Products() {
         myDate={myDate}
       />
       <Dialog
-        sx={{ ".MuiPaper-root": { minWidth: { xs: "100%", md: 800 } } }}
+        sx={{
+          ".MuiPaper-root": { minWidth: { xs: "100%", md: 800 } },
+          overflow: "hidden",
+        }}
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"

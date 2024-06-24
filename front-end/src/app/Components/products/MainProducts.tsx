@@ -38,7 +38,8 @@ export default function MainProducts({
       <Stack
         direction={"row"}
         flexWrap={"wrap"}
-        justifyContent={"space-between"}
+        mt={2}
+        sx={{ justifyContent: { xs: "center", lg: "space-between" }, gap: 3 }}
       >
         <AnimatePresence>
           {data.data.map((item: any) => {
@@ -59,7 +60,7 @@ export default function MainProducts({
                 key={item.id}
                 sx={{
                   width: 333,
-                  mt: 6,
+
                   ":hover .MuiCardMedia-root ": {
                     rotate: "1deg",
                     scale: "1.1",
