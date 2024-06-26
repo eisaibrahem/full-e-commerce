@@ -121,7 +121,7 @@ export default function Hero() {
                       {t("saleUpTo")}
                     </Typography>
                     <Typography color={"#D23F57"} variant="h4">
-                      {t("30% OFF")}
+                      {t("30%OFF")}
                     </Typography>
                   </Stack>
                   <Typography
@@ -214,7 +214,7 @@ export default function Hero() {
                   color: "#2B3445",
                 }}
               >
-                {t("SALE 20% OFF")}
+                {t("SALE20%OFF")}
               </Typography>
 
               <Link

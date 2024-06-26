@@ -15,7 +15,16 @@ import { IntlProvider } from "next-intl";
 export default function Home({ local }: { local: string }) {
   const [theme, colorMode] = useMode();
 
-  const messages = require(`../../../messages/${local}.json`);
+  // Provide a default locale in case `local` is undefined
+  const locale = local || "en";
+
+  let messages;
+  try {
+    messages = require(`../../../messages/${locale}.json`);
+  } catch (error) {
+    console.error(`Failed to load messages for locale ${locale}`, error);
+    messages = {}; // Provide an empty object or a default set of messages
+  }
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -23,9 +32,9 @@ export default function Home({ local }: { local: string }) {
         <CssBaseline />
         <Provider store={store}>
           {/* @ts-ignore */}
-          <IntlProvider messages={messages} local={local}>
+          <IntlProvider messages={messages} locale={locale}>
             <Box>
-              <Header local={local} />
+              <Header local={locale} />
               {/* @ts-ignore */}
               <Box bgcolor={theme.palette.bgColor.main}>
                 <Hero />
