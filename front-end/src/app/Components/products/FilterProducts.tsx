@@ -7,6 +7,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 export default function FilterProducts({ myDate, setmyDate }: any) {
@@ -35,7 +36,7 @@ export default function FilterProducts({ myDate, setmyDate }: any) {
     "products?populate=*&filters[productCategory][$eq]=men";
   const womenCategoryAPI =
     "products?populate=*&filters[productCategory][$eq]=women";
-
+  const t = useTranslations("filter");
   return (
     <Stack
       direction={"row"}
@@ -45,9 +46,9 @@ export default function FilterProducts({ myDate, setmyDate }: any) {
       gap={3}
     >
       <Box>
-        <Typography variant="h6">Selected Products</Typography>
+        <Typography variant="h6">{t("Selected Products")}</Typography>
         <Typography fontWeight={300} variant="body1">
-          All our new arrivals in a exclusive brand selection
+          {t("exclusiveBrand")}
         </Typography>
       </Box>
 
@@ -73,7 +74,7 @@ export default function FilterProducts({ myDate, setmyDate }: any) {
           value={allProductsAPI}
           aria-label="left aligned"
         >
-          All Products
+          {t("allProducts")}
         </ToggleButton>
 
         <ToggleButton
@@ -82,7 +83,7 @@ export default function FilterProducts({ myDate, setmyDate }: any) {
           value={menCategoryAPI}
           aria-label="centered"
         >
-          MEN category
+          {t("menCategory")}
         </ToggleButton>
 
         <ToggleButton
@@ -91,7 +92,7 @@ export default function FilterProducts({ myDate, setmyDate }: any) {
           value={womenCategoryAPI}
           aria-label="right aligned"
         >
-          Women category
+          {t("womenCategory")}
         </ToggleButton>
       </ToggleButtonGroup>
     </Stack>

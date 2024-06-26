@@ -33,7 +33,7 @@
     "freeShipping": "تمتع بشحن مجاني للطلبات التي تزيد عن 99.00 دولار",
     "shopNow": "تسوق الآن واكتشف العروض المذهلة",
     "MEN": "الرجالي",
-    "WOMEN": "نسائي",
+    "WOMEN": "النسائى",
     "30%OFF": "30% خصم",
     "NEW ARRIVALS": "الموصلة الجديدة",
     "shop now": "تسوق الآن",
@@ -46,10 +46,12 @@
   "filter": {
     "allProducts": "جميع المنتجات",
     "menCategory": "الفئة الرجالية",
-    "womenCategory": "الفئة النسائية"
+    "womenCategory": "الفئة النسائية",
+    "exclusiveBrand": "كل المنتجات الجديدة في العلامة التجارية الخاصة بنا",
+    "Selected Products": "المنتجات المختارة"
   },
   "mainProducts": {
-    "addToCart": "اضف للعربة"
+    "addToCart": "أضف للعربة"
   },
   "productDetails": {
     "buyNow": "اشتري الان"

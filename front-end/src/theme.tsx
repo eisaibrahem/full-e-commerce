@@ -61,12 +61,6 @@ export const useMode = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("mode", mode);
-    }
-  }, [mode]);
-
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {

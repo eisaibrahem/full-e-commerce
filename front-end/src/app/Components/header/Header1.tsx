@@ -9,7 +9,7 @@ import {
   ListItem,
   Container,
 } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   DarkModeOutlined,
   ExpandMore,
@@ -19,12 +19,10 @@ import {
   X,
 } from "@mui/icons-material";
 import List from "@mui/material/List";
-
 import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useTranslations } from "next-intl";
-import { GetStaticProps } from "next";
 import Link from "next/link";
 
 const options = ["ar", "en"];
@@ -34,6 +32,7 @@ export default function Header1({ local }: { local: string }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedIndex, setSelectedIndex] = useState(Number);
   const open = Boolean(anchorEl);
+
   const handleClickListItem = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -49,7 +48,16 @@ export default function Header1({ local }: { local: string }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const t = useTranslations("header1");
+
+  useEffect(() => {
+    const storedMode = localStorage.getItem("mode");
+    if (storedMode && storedMode !== theme.palette.mode) {
+      colorMode.toggleColorMode();
+    }
+  }, [colorMode, theme.palette.mode]);
+
   return (
     <Box
       bgcolor={"#2b3445"}

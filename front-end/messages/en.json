@@ -47,7 +47,9 @@
         "title": "FILTER AREA",
         "allProducts": "All Products",
         "menCategory": "Men Category",
-        "womenCategory": "Women Category"
+        "womenCategory": "Women Category",
+        "exclusiveBrand": "All our new arrivals in a exclusive brand selection",
+        "Selected Products": "Selected Products"
     },
     "mainProducts": {},
     "productDetails": {

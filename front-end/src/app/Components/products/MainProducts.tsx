@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useGetProductByNameQuery } from "@/Redux/Product";
 import Loading from "../loading/Loading";
+import { useTranslations } from "next-intl";
 
 const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE;
 export default function MainProducts({
@@ -21,6 +22,7 @@ export default function MainProducts({
   setOpen,
   setclickedProduct,
 }: any) {
+  const t = useTranslations("mainProducts");
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -114,7 +116,7 @@ export default function MainProducts({
                     size="large"
                   >
                     <AddShoppingCartOutlined sx={{ mr: 1 }} fontSize="small" />
-                    add to cart
+                    {t("addToCart")}
                   </Button>
                   <Rating
                     precision={0.1}
