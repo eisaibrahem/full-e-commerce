@@ -21,8 +21,10 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { alpha, styled, useTheme } from "@mui/material/styles";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 
-const options = ["All Categories", "Cars", "Elctonics", "Clothes", "Shoes"];
+const options = ["All Categories", "Cars", "Electronics", "Clothes", "Shoes"];
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
     left: -3,
@@ -77,6 +79,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 export default function Header2() {
+  const t = useTranslations("header2");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedIndex, setSelectedIndex] = useState(Number);
   const open = Boolean(anchorEl);
@@ -153,7 +156,7 @@ export default function Header2() {
               onClick={handleClickListItem}
             >
               <ListItemText
-                secondary={options[selectedIndex]}
+                secondary={t(options[selectedIndex])}
                 sx={{
                   ".MuiTypography-root": {
                     fontSize: "14px",
@@ -184,7 +187,7 @@ export default function Header2() {
                 selected={index === selectedIndex}
                 onClick={(event) => handleMenuItemClick(event, index)}
               >
-                {option}
+                {t(option)}
               </MenuItem>
             ))}
           </Menu>

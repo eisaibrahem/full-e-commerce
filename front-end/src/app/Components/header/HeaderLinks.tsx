@@ -11,9 +11,11 @@ import {
   useTheme,
   Divider,
 } from "@mui/material";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 export default function HeaderLinks() {
+  const t = useTranslations("header3");
   const linksData = [
     {
       title: "Home",
@@ -51,7 +53,7 @@ export default function HeaderLinks() {
           }}
         >
           <Stack direction={"row"} alignItems={"center"}>
-            <Typography variant="body2">{item.title}</Typography>
+            <Typography variant="body2">{t(item.title)}</Typography>
             <ExpandMoreOutlined />
           </Stack>
           <Box
@@ -87,7 +89,7 @@ export default function HeaderLinks() {
                           },
                         }}
                       >
-                        <ListItemText primary={subTitle} />
+                        <ListItemText primary={t(subTitle)} />
                         {item.deep?.find((t) => t === subTitle) && (
                           <ExpandMoreOutlined
                             sx={{ transform: "rotate(-90deg)" }}
@@ -122,7 +124,9 @@ export default function HeaderLinks() {
                                         },
                                       }}
                                     >
-                                      <ListItemText primary="Edit Product" />
+                                      <ListItemText
+                                        primary={t("Edit Product")}
+                                      />
                                       <Edit fontSize="small" />
                                     </ListItemButton>
                                   </ListItem>
@@ -139,7 +143,9 @@ export default function HeaderLinks() {
                                         },
                                       }}
                                     >
-                                      <ListItemText primary="Add Product" />
+                                      <ListItemText
+                                        primary={t("Add Product")}
+                                      />
                                       <Add fontSize="small" />
                                     </ListItemButton>
                                   </ListItem>

@@ -1,0 +1,66 @@
+{
+    "header1": {
+        "Hot": "Hot",
+        "Deals of the day": "Deals of the day"
+    },
+    "header2": {
+        "All Categories": "All Categories",
+        "Cars": "Cars",
+        "Electronics": "Electronics",
+        "Clothes": "Clothes",
+        "Shoes": "Shoes"
+    },
+    "header3": {
+        "Home": "Home",
+        "Pages": "Pages",
+        "Blog": "Blog",
+        "Shop": "Shop",
+        "Portfolio": "Portfolio",
+        "Contact": "Contact",
+        "Categories": "Categories",
+        "About": "About",
+        "Projects": "Projects",
+        "Games": "Games",
+        "Electronics": "Electronics",
+        "Books": "Books",
+        "Team": "Team",
+        "Edit Product": "Edit Product",
+        "Add Product": "Add Product"
+    },
+    "hero": {
+        "lifeStyleCollection": "LIFESTYLE COLLECTION",
+        "saleUpTo": "SALE UP TO",
+        "freeShipping": "Get Free Shipping on orders over $99.00",
+        "shopNow": "shop now",
+        "MEN": "MEN",
+        "WOMEN": "WOMEN",
+        "30%OFF": "30% OFF",
+        "NEW ARRIVALS": "NEW ARRIVALS",
+        "shop now": "SHOP NOW",
+        "SUMMER": "SUMMER",
+        "SALE 20% OFF": "SALE 20% OFF",
+        "GAMING 4K": "GAMING 4K",
+        "DESKTOPS &": "DESKTOPS",
+        "LAPTOPS": "LAPTOPS"
+    },
+    "filter": {
+        "title": "FILTER AREA",
+        "allProducts": "All Products",
+        "menCategory": "Men Category",
+        "womenCategory": "Women Category"
+    },
+    "mainProducts": {},
+    "productDetails": {
+        "buyNow": "Buy Now"
+    },
+    "iconSection": {
+        "fastDelivery": "Fast Delivery",
+        "fastDeliverySub": "Free shipping from $10",
+        "moneyGuarantee": "Money Guarantee",
+        "moneyGuaranteeSub": "7 days for return",
+        "365Days": "365 Days",
+        "365DaysSub": "Returns within 365 days",
+        "payment": "Payment",
+        "paymentSub": "Fast Payment"
+    }
+}

@@ -1,0 +1,67 @@
+{
+  "header1": {
+    "Hot": "شائع",
+    "Deals of the day": " أغتنم صفقات اليوم"
+  },
+  "header2": {
+    "All Categories": "كل التصنيفات",
+    "Cars": "السيارات",
+    "Electronics": "الاجهزة الالكترونية",
+    "Clothes": "الملابس",
+    "Shoes": "الحقائب"
+  },
+  "header3": {
+    "Home": "الرئيسية",
+    "Pages": "الصفحات",
+    "Blog": "المدونة",
+    "Shop": "المتجر",
+    "Portfolio": "المشاريع",
+    "Contact": "اتصل بنا",
+    "Categories": "التصنيفات",
+    "About": "عنا",
+    "Projects": "المشاريع",
+    "Games": "الالعاب",
+    "Electronics": "الاجهزة الالكترونية",
+    "Books": "الكتب",
+    "Team": "الفريق",
+    "Edit Product": "تعديل المنتج",
+    "Add Product": "اضافة منتج"
+  },
+  "hero": {
+    "lifeStyleCollection": "مجموعة أنماط الحياة",
+    "saleUpTo": "تخفيضات تصل إلى",
+    "freeShipping": "تمتع بشحن مجاني للطلبات التي تزيد عن 99.00 دولار",
+    "shopNow": "تسوق الآن واكتشف العروض المذهلة",
+    "MEN": "الرجالي",
+    "WOMEN": "نسائي",
+    "30% OFF": "30% خصم",
+    "NEW ARRIVALS": "الموصلة الجديدة",
+    "shop now": "تسوق الآن",
+    "SUMMER": "الصيف",
+    "SALE 20% OFF": "20% خصم",
+    "GAMING 4K": "4kالالعاب ",
+    "DESKTOPS &": " والكمبيوتر",
+    "LAPTOPS": "اللابتوبات"
+  },
+  "filter": {
+    "allProducts": "جميع المنتجات",
+    "menCategory": "الفئة الرجالية",
+    "womenCategory": "الفئة النسائية"
+  },
+  "mainProducts": {
+    "addToCart": "اضف للعربة"
+  },
+  "productDetails": {
+    "buyNow": "اشتري الان"
+  },
+  "iconSection": {
+    "fastDelivery": "سرعة التوصيل",
+    "fastDeliverySub": "بدئة من $10",
+    "moneyGuarantee": "ضمان المال",
+    "moneyGuaranteeSub": "7 ايام للاسترجاع",
+    "365Days": "365 يوم",
+    "365DaysSub": "للاسترجاع بعد 365 يوم",
+    "payment": "الدفع",
+    "paymentSub": "الدفع السريع"
+  }
+}

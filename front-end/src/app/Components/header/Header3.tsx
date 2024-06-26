@@ -1,22 +1,15 @@
 "use client";
-
+import React, { useState } from "react";
 import {
-  Close,
-  KeyboardArrowRight,
-  Laptop,
-  MenuBookOutlined,
-  MenuOutlined,
-  SportsEsportsOutlined,
-  Window,
-} from "@mui/icons-material";
-import {
+  Accordion,
+  AccordionSummary,
   Box,
   Button,
   Container,
-  Divider,
   Drawer,
   IconButton,
   List,
+  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -27,17 +20,21 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import React, { useState } from "react";
-import ListItem from "@mui/material/ListItem";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import {
+  Close,
+  ExpandMore,
+  KeyboardArrowRight,
+  Laptop,
+  MenuBookOutlined,
+  MenuOutlined,
+  SportsEsportsOutlined,
+  Window,
+} from "@mui/icons-material";
+import { useTranslations } from "next-intl";
 import HeaderLinks from "./HeaderLinks";
 
 export default function Header3() {
+  const t = useTranslations("header3");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -58,38 +55,32 @@ export default function Header3() {
     { title: "Pages", subTitles: ["About", "Contact"] },
     { title: "Blog", subTitles: ["Contact"] },
     { title: "Shop", subTitles: ["About", "Contact"] },
-    {
-      title: "Portfolio",
-      subTitles: ["About", "Contact"],
-    },
-    {
-      title: "Contact",
-      subTitles: ["About", "Contact"],
-    },
+    { title: "Portfolio", subTitles: ["About", "Contact"] },
+    { title: "Contact", subTitles: ["About", "Contact"] },
   ];
-  const drawerList = () => {
-    return drowerData.map((item, index) => (
+
+  const drawerList = () =>
+    drowerData.map((item, index) => (
       <Accordion key={index} sx={{ bgcolor: bgSelector, width: "90%", py: 0 }}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMore />}
           aria-controls="panel1-content"
           id="panel1-header"
         >
-          {item.title}
+          {t(item.title)}
         </AccordionSummary>
-
         <List sx={{ py: 0 }}>
           {item.subTitles.map((subTitle, index) => (
             <ListItem key={index} sx={{ py: 0 }}>
               <ListItemButton sx={{ py: 0 }}>
-                <ListItemText primary={subTitle} />
+                <ListItemText primary={t(subTitle)} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Accordion>
     ));
-  };
+
   return (
     <Container sx={{ mt: 1 }}>
       <Stack
@@ -106,7 +97,6 @@ export default function Header3() {
             onClick={handleClick}
             sx={{
               width: "220px",
-              // @ts-ignore
               bgcolor: bgSelector,
               justifyContent: "start",
               color: theme.palette.text.secondary,
@@ -115,26 +105,22 @@ export default function Header3() {
           >
             <Window />
             <Typography sx={{ p: "0 ", textTransform: "capitalize", mx: 1 }}>
-              Category
+              {t("Categories")}
             </Typography>
             <Box flexGrow={1} />
-            {
-              <KeyboardArrowRight
-                sx={{
-                  transition: "all 0.3s ease",
-                  transform: open ? "rotate(90deg)" : "rotate(0deg)",
-                }}
-              />
-            }
+            <KeyboardArrowRight
+              sx={{
+                transition: "all 0.3s ease",
+                transform: open ? "rotate(90deg)" : "rotate(0deg)",
+              }}
+            />
           </Button>
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
-            }}
+            MenuListProps={{ "aria-labelledby": "basic-button" }}
             sx={{
               marginTop: "8px",
               ".MuiMenu-list": { width: "220px", bgcolor: bgSelector, p: "0" },
@@ -144,19 +130,19 @@ export default function Header3() {
               <ListItemIcon>
                 <SportsEsportsOutlined fontSize="small" />
               </ListItemIcon>
-              <ListItemText>Games</ListItemText>
+              <ListItemText>{t("Games")}</ListItemText>
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <Laptop fontSize="small" />
               </ListItemIcon>
-              <ListItemText>Electronics</ListItemText>
+              <ListItemText>{t("Electronics")}</ListItemText>
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <MenuBookOutlined fontSize="small" />
               </ListItemIcon>
-              <ListItemText>Books</ListItemText>
+              <ListItemText>{t("Books")}</ListItemText>
             </MenuItem>
           </Menu>
         </Box>
@@ -203,7 +189,7 @@ export default function Header3() {
               }}
               onClick={() => setIsDrawerOpen(false)}
             >
-              <Close fontSize="small" sx={{}} />
+              <Close fontSize="small" />
             </IconButton>
             {drawerList()}
           </Stack>

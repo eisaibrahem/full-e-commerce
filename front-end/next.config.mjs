@@ -1,3 +1,5 @@
+import createNextIntlPlugin from "next-intl/plugin";
+const withNextIntl = createNextIntlPlugin();
 // next.config.mjs
 const nextConfig = {
   images: {
@@ -17,4 +19,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

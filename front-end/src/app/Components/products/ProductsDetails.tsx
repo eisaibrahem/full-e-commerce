@@ -7,10 +7,12 @@ import Image from "next/image";
 import { useState } from "react";
 import Loading from "../loading/Loading";
 import { useGetProductByNameQuery } from "@/Redux/Product";
+import { useTranslations } from "next-intl";
 
 const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE;
 export default function ProductsDetails({ clickedProduct, myDate }: any) {
   const [selectedImg, setSelectedImg] = useState(0);
+  const t = useTranslations("productDetails");
   const { data, error, isLoading } = useGetProductByNameQuery(myDate);
 
   return error ? (
@@ -134,7 +136,7 @@ export default function ProductsDetails({ clickedProduct, myDate }: any) {
             variant="contained"
           >
             <AddShoppingCartOutlined sx={{ mr: 1 }} fontSize="small" />
-            Buy now
+            {t("buyNow")}
           </Button>
         </Box>
       </Box>

@@ -11,8 +11,10 @@ import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import CreditScoreOutlinedIcon from "@mui/icons-material/CreditScoreOutlined";
 import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 import AccessAlarmOutlinedIcon from "@mui/icons-material/AccessAlarmOutlined";
+import { useTranslations } from "next-intl";
 
 export default function IconsSection() {
+  const t = useTranslations("iconSection");
   const theme = useTheme();
   return (
     <Container
@@ -30,23 +32,23 @@ export default function IconsSection() {
       >
         <MyBox
           icon={<ElectricBoltIcon fontSize="large" />}
-          title={"Fast Delivery"}
-          subTitle={"Start from $10"}
+          title={t("fastDelivery")}
+          subTitle={t("fastDeliverySub")}
         />
         <MyBox
           icon={<WorkspacePremiumOutlinedIcon fontSize="large" />}
-          title={"Money Guarantee"}
-          subTitle={"7 Days Back"}
+          title={t("moneyGuarantee")}
+          subTitle={t("moneyGuaranteeSub")}
         />
         <MyBox
           icon={<AccessAlarmOutlinedIcon fontSize="large" />}
-          title={"365 Days"}
-          subTitle={"For free return"}
+          title={t("365Days")}
+          subTitle={t("365DaysSub")}
         />
         <MyBox
           icon={<CreditScoreOutlinedIcon fontSize="large" />}
-          title={"Payment"}
-          subTitle={"Secure system"}
+          title={t("payment")}
+          subTitle={t("paymentSub")}
         />
       </Stack>
     </Container>

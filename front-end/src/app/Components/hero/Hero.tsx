@@ -22,12 +22,14 @@ import "./style.css";
 // import required modules
 import { Pagination } from "swiper/modules";
 import IconsSection from "./IconsSection";
+import { useTranslations } from "next-intl";
 
 const mySlider = [
   { text: "MEN", link: "/assets/images/banner-15.jpg" },
   { text: "WOMEN", link: "/assets/images/banner-25.jpg" },
 ];
 export default function Hero() {
+  const t = useTranslations("hero");
   const theme = useTheme();
 
   return (
@@ -94,7 +96,7 @@ export default function Hero() {
                     }}
                     variant="h5"
                   >
-                    LIFESTYLE COLLECTION
+                    {t("lifeStyleCollection")}
                   </Typography>
 
                   <Typography
@@ -105,7 +107,7 @@ export default function Hero() {
                     }}
                     variant="h3"
                   >
-                    {item.text}
+                    {t(item.text)}
                   </Typography>
 
                   <Stack
@@ -116,10 +118,10 @@ export default function Hero() {
                     alignItems={"center"}
                   >
                     <Typography color={"#333"} mr={1} variant="h4">
-                      SALE UP TO
+                      {t("saleUpTo")}
                     </Typography>
                     <Typography color={"#D23F57"} variant="h4">
-                      30% OFF
+                      {t("30% OFF")}
                     </Typography>
                   </Stack>
                   <Typography
@@ -130,7 +132,7 @@ export default function Hero() {
                     }}
                     variant="body1"
                   >
-                    Get Free Shipping on orders over $99.00
+                    {t("freeShipping")}
                   </Typography>
 
                   <Button
@@ -149,7 +151,7 @@ export default function Hero() {
                     }}
                     variant="contained"
                   >
-                    shop now
+                    {t("shopNow")}
                   </Button>
                 </Box>
               </SwiperSlide>
@@ -194,7 +196,7 @@ export default function Hero() {
                   fontSize: "18px",
                 }}
               >
-                NEW ARRIVALS
+                {t("NEW ARRIVALS")}
               </Typography>
               <Typography
                 variant="h6"
@@ -204,7 +206,7 @@ export default function Hero() {
                   mt: 1,
                 }}
               >
-                SUMMER
+                {t("SUMMER")}
               </Typography>
               <Typography
                 variant="h6"
@@ -212,7 +214,7 @@ export default function Hero() {
                   color: "#2B3445",
                 }}
               >
-                SALE 20% OFF
+                {t("SALE 20% OFF")}
               </Typography>
 
               <Link
@@ -230,7 +232,7 @@ export default function Hero() {
                 href="#"
                 underline="none"
               >
-                shop now
+                {t("shop now")}
                 <ArrowForwardIosOutlined sx={{ fontSize: "13px" }} />
               </Link>
             </Stack>
@@ -264,7 +266,7 @@ export default function Hero() {
                   fontWeight: 300,
                 }}
               >
-                GAMING 4K
+                {t("GAMING 4K")}
               </Typography>
               <Typography
                 variant="h6"
@@ -274,7 +276,7 @@ export default function Hero() {
                   mt: 1,
                 }}
               >
-                DESKTOPS &
+                {t("DESKTOPS &")}
               </Typography>
 
               <Typography
@@ -283,7 +285,7 @@ export default function Hero() {
                   color: "#2B3445",
                 }}
               >
-                LAPTOPS
+                {t("LAPTOPS")}
               </Typography>
 
               <Link
@@ -301,7 +303,7 @@ export default function Hero() {
                 href="#"
                 underline="none"
               >
-                shop now
+                {t("shop now")}
                 <ArrowForwardIosOutlined sx={{ fontSize: "13px" }} />
               </Link>
             </Stack>

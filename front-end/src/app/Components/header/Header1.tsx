@@ -19,13 +19,16 @@ import {
   X,
 } from "@mui/icons-material";
 import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
+
 import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import { useTranslations } from "next-intl";
+import { GetStaticProps } from "next";
+import Link from "next/link";
 
-const options = ["AR", "EN"];
-export default function Header1() {
+const options = ["ar", "en"];
+export default function Header1({ local }: { local: string }) {
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -46,7 +49,7 @@ export default function Header1() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const t = useTranslations("header1");
   return (
     <Box
       bgcolor={"#2b3445"}
@@ -68,10 +71,10 @@ export default function Header1() {
               borderRadius={2}
               sx={{ p: "3px 10px", textTransform: "uppercase" }}
             >
-              Hot
+              {t("Hot")}
             </Typography>
             <Typography variant="body1" fontSize={"12px"}>
-              Deals of the day
+              {t("Deals of the day")}
             </Typography>
           </Stack>
           <Stack direction={"row"} alignItems={"center"} gap={1}>
@@ -108,7 +111,7 @@ export default function Header1() {
                 onClick={handleClickListItem}
               >
                 <ListItemText
-                  secondary={options[selectedIndex]}
+                  secondary={local.toUpperCase()}
                   sx={{
                     ".MuiTypography-root": {
                       fontSize: "12px",
@@ -131,14 +134,22 @@ export default function Header1() {
               }}
             >
               {options.map((option, index) => (
-                <MenuItem
-                  sx={{ fontSize: "12px" }}
+                <Link
                   key={option}
-                  selected={index === selectedIndex}
+                  href={option}
                   onClick={(event) => handleMenuItemClick(event, index)}
+                  style={{
+                    textDecoration: "none",
+                    color: theme.palette.text.primary,
+                  }}
                 >
-                  {option}
-                </MenuItem>
+                  <MenuItem
+                    sx={{ fontSize: "12px" }}
+                    selected={option === local}
+                  >
+                    {option.toUpperCase()}
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
             {/* Language Button */}
