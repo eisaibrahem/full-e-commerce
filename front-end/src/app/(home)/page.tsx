@@ -40,7 +40,6 @@ export default function Home({ local }: { local: string }) {
                 <Hero />
               </Box>
               <Products />
-              <Footer />
               <ScrollToTop />
             </Box>
           </IntlProvider>
