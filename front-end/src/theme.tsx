@@ -4,7 +4,7 @@ import { createTheme } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 import { PaletteMode } from "@mui/material";
 
-const getDesignTokens = (mode: PaletteMode) => ({
+const getDesignTokens = (mode: any) => ({
   palette: {
     mode,
     ...(mode === "light"
@@ -50,11 +50,11 @@ export const ColorModeContext = createContext({
 });
 
 export const useMode = () => {
-  const [mode, setMode] = useState<PaletteMode>("light");
+  const [mode, setMode] = useState(localStorage.getItem("mode") ?? "light");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedMode = localStorage.getItem("mode") as PaletteMode;
+      const storedMode = localStorage.getItem("mode");
       if (storedMode) {
         setMode(storedMode);
       }

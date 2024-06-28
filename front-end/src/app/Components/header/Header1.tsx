@@ -26,7 +26,13 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 const options = ["ar", "en"];
-export default function Header1({ local }: { local: string }) {
+export default function Header1({
+  local,
+  isCart,
+}: {
+  local: string;
+  isCart: boolean;
+}) {
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -144,7 +150,7 @@ export default function Header1({ local }: { local: string }) {
               {options.map((option, index) => (
                 <Link
                   key={option}
-                  href={option}
+                  href={isCart ? `/${option}/cart` : option}
                   onClick={(event) => handleMenuItemClick(event, index)}
                   style={{
                     textDecoration: "none",

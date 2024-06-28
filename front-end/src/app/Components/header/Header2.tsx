@@ -1,4 +1,6 @@
+"use client";
 import {
+  Close,
   ExpandMore,
   PersonOutline,
   SearchOutlined,
@@ -9,20 +11,26 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   Box,
   Container,
+  Drawer,
   IconButton,
   InputBase,
   List,
   ListItem,
+  ListItemButton,
+  ListItemIcon,
   ListItemText,
   Menu,
   MenuItem,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
-import { alpha, styled, useTheme } from "@mui/material/styles";
-import Image from "next/image";
+import { styled } from "@mui/material/styles";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import Image from "next/image";
+import RightDrawer from "./drawers/RightDrawer";
 
 const options = ["All Categories", "Cars", "Electronics", "Clothes", "Shoes"];
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
@@ -78,7 +86,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   color: "#777",
 }));
 
-export default function Header2() {
+export default function Header2({ local }: { local: string }) {
   const t = useTranslations("header2");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedIndex, setSelectedIndex] = useState(Number);
@@ -100,7 +108,9 @@ export default function Header2() {
   };
 
   const theme = useTheme();
-
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  // @ts-ignore
+  const bgSelector = theme.palette.backgroundSelector.main;
   return (
     <Container sx={{ mt: 1 }}>
       <Stack
@@ -108,10 +118,15 @@ export default function Header2() {
         justifyContent="space-between"
         alignItems={"center"}
       >
-        <Stack alignItems={"center"}>
-          <ShoppingCart />
-          <Typography variant="body2">E-commerce</Typography>
-        </Stack>
+        <Link
+          href={"/"}
+          style={{ textDecoration: "none", color: theme.palette.text.primary }}
+        >
+          <Stack alignItems={"center"}>
+            <ShoppingCart />
+            <Typography variant="body2">E-commerce</Typography>
+          </Stack>
+        </Link>
 
         <Search
           sx={{
@@ -194,7 +209,10 @@ export default function Header2() {
         </Search>
 
         <Stack direction="row" spacing={1}>
-          <IconButton aria-label="cart">
+          <IconButton
+            aria-label="cart"
+            onClick={() => setIsDrawerOpen((prev) => !prev)}
+          >
             <StyledBadge
               badgeContent={4}
               color="primary"
@@ -206,6 +224,36 @@ export default function Header2() {
               <ShoppingCartIcon />
             </StyledBadge>
           </IconButton>
+
+          <Drawer
+            anchor={"right"}
+            open={isDrawerOpen}
+            onClose={() => setIsDrawerOpen(false)}
+            sx={{
+              overflow: "hidden",
+              ".MuiDrawer-paper": {
+                width: 400,
+                height: "100%",
+                borderRadius: "0 0 6px 6px",
+                overflow: "hidden",
+              },
+              ".MuiStack-root": {
+                p: 0,
+              },
+            }}
+          >
+            <Stack
+              sx={{
+                py: 3,
+                alignItems: "center",
+                bgcolor: bgSelector,
+                position: "relative",
+                borderRadius: "0 0 6px 6px",
+              }}
+            >
+              <RightDrawer setIsDrawerOpen={setIsDrawerOpen} local={local} />
+            </Stack>
+          </Drawer>
 
           <IconButton aria-label="cart">
             <PersonOutline />
