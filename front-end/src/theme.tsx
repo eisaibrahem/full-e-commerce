@@ -19,10 +19,20 @@ const getDesignTokens = (mode: any) => ({
             main: grey[300],
           },
           backgroundSelector: {
-            main: "#f6f9fc",
+            main: "#f6f9fc !important",
           },
           bgColor: {
-            main: "#f6f6f6",
+            main: "#f6f6f6 !important",
+          },
+          primaryColor: {
+            main: "#d23f57 !important",
+          },
+          textSteper: {
+            main: "#e07384 !important",
+          },
+
+          secondaryColor: {
+            main: "#e07384 !important",
           },
         }
       : {
@@ -40,6 +50,16 @@ const getDesignTokens = (mode: any) => ({
           },
           bgColor: {
             main: "#1d2021",
+          },
+          primaryColor: {
+            main: "#e07384 !important",
+          },
+          textSteper: {
+            main: "#d23f57 !important",
+          },
+
+          secondaryColor: {
+            main: "#d23f57 !important",
           },
         }),
   },

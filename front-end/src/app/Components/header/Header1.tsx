@@ -80,14 +80,14 @@ export default function Header1({
             <Typography
               variant="body1"
               bgcolor={"#d23f57"}
-              fontSize={"10px"}
+              fontSize={"12px"}
               fontWeight={"bold"}
               borderRadius={2}
               sx={{ p: "3px 10px", textTransform: "uppercase" }}
             >
               {t("Hot")}
             </Typography>
-            <Typography variant="body1" fontSize={"12px"}>
+            <Typography variant="body1" fontSize={"14px"}>
               {t("Deals of the day")}
             </Typography>
           </Stack>

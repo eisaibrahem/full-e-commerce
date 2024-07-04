@@ -1,4 +1,5 @@
 "use client";
+
 import Header from "@/app/Components/header/Header";
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -8,14 +9,26 @@ import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { ColorModeContext, useMode } from "@/theme";
-import { Container, CssBaseline, ThemeProvider } from "@mui/material";
+import {
+  Container,
+  CssBaseline,
+  Divider,
+  Paper,
+  Stack,
+  StepConnector,
+  stepConnectorClasses,
+  styled,
+  ThemeProvider,
+} from "@mui/material";
 import { IntlProvider } from "next-intl";
+import Cart from "@/app/Components/cart/Cart";
+import Details from "@/app/Components/cart/Details";
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import Payment from "@/app/Components/cart/Payment";
+import OrdersPage from "@/app/Components/cart/review";
 
-const steps = [
-  "Select campaign settings",
-  "Create an ad group",
-  "Create an ad",
-];
+const steps = ["Cart", "Details", "Payment", "Review"];
 
 export default function Page({
   params: { local },
@@ -30,11 +43,16 @@ export default function Page({
     messages = {}; // Provide an empty object or a default set of messages
   }
   const [theme, colorMode] = useMode();
-
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [completed, setCompleted] = React.useState<{
+  const [total, setTotal] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const [completed, setCompleted] = useState<{
     [k: number]: boolean;
   }>({});
+
+  // @ts-ignore
+  const primaryColor = theme.palette.primaryColor.main;
+  // @ts-ignore
+  const secondaryColor = theme.palette.secondaryColor.main;
 
   const totalSteps = () => {
     return steps.length;
@@ -82,79 +100,29 @@ export default function Page({
     setCompleted({});
   };
 
-  return (
-    <Box>
-      <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <IntlProvider messages={messages} locale={local}>
-            <Header local={local} isCart={true} />
-            <Container sx={{ my: 3 }}>
-              <Stepper
-                nonLinear
-                activeStep={activeStep}
-                sx={{ border: "1px solid #f44336" }}
-              >
-                {steps.map((label, index) => (
-                  <Step key={label} completed={completed[index]}>
-                    <StepButton color="inherit" onClick={handleStep(index)}>
-                      {label}
-                    </StepButton>
-                  </Step>
-                ))}
-              </Stepper>
-              <div>
-                {allStepsCompleted() ? (
-                  <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1 }}>
-                      All steps completed - you&apos;re finished
-                    </Typography>
-                    <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                      <Box sx={{ flex: "1 1 auto" }} />
-                      <Button onClick={handleReset}>Reset</Button>
-                    </Box>
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-                      Step {activeStep + 1}
-                    </Typography>
-                    <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                      <Button
-                        color="inherit"
-                        disabled={activeStep === 0}
-                        onClick={handleBack}
-                        sx={{ mr: 1 }}
-                      >
-                        Back
-                      </Button>
-                      <Box sx={{ flex: "1 1 auto" }} />
-                      <Button onClick={handleNext} sx={{ mr: 1 }}>
-                        Next
-                      </Button>
-                      {activeStep !== steps.length &&
-                        (completed[activeStep] ? (
-                          <Typography
-                            variant="caption"
-                            sx={{ display: "inline-block" }}
-                          >
-                            Step {activeStep + 1} already completed
-                          </Typography>
-                        ) : (
-                          <Button onClick={handleComplete}>
-                            {completedSteps() === totalSteps() - 1
-                              ? "Finish"
-                              : "Complete Step"}
-                          </Button>
-                        ))}
-                    </Box>
-                  </React.Fragment>
-                )}
-              </div>
-            </Container>
-          </IntlProvider>
-        </ThemeProvider>
-      </ColorModeContext.Provider>
-    </Box>
-  );
+  const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
+    [`&.${stepConnectorClasses.alternativeLabel}`]: {
+      top: 22,
+    },
+    [`&.${stepConnectorClasses.active}`]: {
+      [`& .${stepConnectorClasses.line}`]: {
+        backgroundImage:
+          "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
+      },
+    },
+    [`&.${stepConnectorClasses.completed}`]: {
+      [`& .${stepConnectorClasses.line}`]: {
+        backgroundImage:
+          "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
+      },
+    },
+    [`& .${stepConnectorClasses.line}`]: {
+      height: 3,
+      border: 0,
+      backgroundColor:
+        theme.palette.mode === "dark" ? theme.palette.grey[800] : "#eaeaf0",
+      borderRadius: 1,
+    },
+  }));
+  return <Cart total={total} setTotal={setTotal} handleNext={handleNext} />;
 }
