@@ -25,6 +25,7 @@ import {
   completedStepsAtom,
   stepsAtom,
 } from "@/atoms/stepperAtoms";
+import { useTranslations } from "next-intl";
 
 export default function Payment() {
   const [total, setTotal] = useRecoilState(totalAtom);
@@ -74,6 +75,8 @@ export default function Payment() {
     setActiveStep(2);
     localStorage.setItem("activeStep", "2");
   }, []);
+
+  const t = useTranslations("cart");
   return (
     <Stack
       component={motion.section}
@@ -91,14 +94,14 @@ export default function Payment() {
           <FormControl sx={{ display: "block" }}>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="Pay with credit card"
+              defaultValue={t("Pay with credit card")}
               name="radio-buttons-group"
               onChange={handleChange}
             >
               <FormControlLabel
                 value="Pay with credit card"
                 control={<Radio />}
-                label="Pay with credit card"
+                label={t("Pay with credit card")}
               />
 
               {selectedValue === "Pay with credit card" && (
@@ -114,16 +117,16 @@ export default function Payment() {
                       <TextField
                         size="small"
                         id="outlined-textarea"
-                        label="Card Number"
-                        placeholder="Card Number"
+                        label={t("Card Number")}
+                        placeholder={t("Card Number")}
                         multiline
                       />
                       <TextField
                         size="small"
                         id="outlined-textarea"
                         type="number"
-                        label="Name On Card"
-                        placeholder="Name On Card"
+                        label={t("Name On Card")}
+                        placeholder={t("Name On Card")}
                         multiline
                       />
                     </Stack>
@@ -132,7 +135,7 @@ export default function Payment() {
                         size="small"
                         id="outlined-textarea"
                         type="number"
-                        label="Exp Data"
+                        label={t("Exp Date")}
                         placeholder="MM/YY"
                         multiline
                       />
@@ -150,7 +153,7 @@ export default function Payment() {
                     color="error"
                     sx={{ my: 2, mr: "auto" }}
                   >
-                    Submit
+                    {t("Submit")}
                   </Button>
                 </>
               )}
@@ -158,7 +161,7 @@ export default function Payment() {
               <FormControlLabel
                 value="Pay with Paypal"
                 control={<Radio />}
-                label="Pay with Paypal"
+                label={t("Pay with Paypal")}
               />
               {selectedValue === "Pay with Paypal" && (
                 <>
@@ -172,7 +175,7 @@ export default function Payment() {
                       multiline
                     />
                     <Button variant="outlined" color="error" sx={{ my: 2 }}>
-                      Submit
+                      {t("Submit")}
                     </Button>
                   </Stack>
                 </>
@@ -182,7 +185,7 @@ export default function Payment() {
               <FormControlLabel
                 value="Cash On Delivery"
                 control={<Radio />}
-                label="Cash On Delivery"
+                label={t("Cash On Delivery")}
               />
             </RadioGroup>
           </FormControl>
@@ -199,11 +202,11 @@ export default function Payment() {
             variant="outlined"
             color="error"
           >
-            Back To Checkout
+            {t("Back To Checkout")}
           </Button>
           <Link href="review" style={{ flexGrow: 1 }}>
             <Button sx={{ width: "100%" }} variant="contained" color="error">
-              Review
+              {t("review")}
             </Button>
           </Link>
         </Stack>
@@ -217,7 +220,7 @@ export default function Payment() {
             alignItems={"center"}
           >
             <Typography variant="body1" color="#777">
-              SubTotal:
+              {t("subtotal")}:
             </Typography>
             <Typography variant="body1" sx={{ fontWeight: "bold" }}>
               ${total.toFixed(2)}
@@ -229,7 +232,7 @@ export default function Payment() {
             alignItems={"center"}
           >
             <Typography variant="body1" color="#777">
-              Shipping:
+              {t("shipping")}:
             </Typography>
             <Typography variant="body1">-</Typography>
           </Stack>
@@ -239,7 +242,7 @@ export default function Payment() {
             alignItems={"center"}
           >
             <Typography variant="body1" color="#777">
-              Tax:
+              {t("tax")}:
             </Typography>
             <Typography variant="body1" sx={{ fontWeight: "bold" }}>
               $40.00
@@ -251,7 +254,7 @@ export default function Payment() {
             alignItems={"center"}
           >
             <Typography variant="body1" color="#777">
-              Discount:
+              {t("discount")}:
             </Typography>
             <Typography variant="body1" sx={{ fontWeight: "bold" }}>
               $20.00

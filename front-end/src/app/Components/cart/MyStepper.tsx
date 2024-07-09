@@ -12,6 +12,7 @@ import {
   Stepper,
   styled,
 } from "@mui/material";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
 import { useRecoilState } from "recoil";
@@ -100,7 +101,7 @@ export default function MyStepper({ local }: { local: string }) {
       borderRadius: 1,
     },
   }));
-
+  const t = useTranslations("cart");
   return (
     <>
       {activeStep !== 3 && (
@@ -163,7 +164,13 @@ export default function MyStepper({ local }: { local: string }) {
             >
               <Link
                 href={
-                  index === 0
+                  activeStep === 0
+                    ? index === 0
+                      ? `/${local}/cart`
+                      : index === 1
+                      ? "cart/details"
+                      : "cart/payment"
+                    : index === 0
                     ? `/${local}/cart`
                     : index === 1
                     ? "details"
@@ -184,7 +191,7 @@ export default function MyStepper({ local }: { local: string }) {
                   }}
                   onClick={handleStep(index)}
                 >
-                  {label}
+                  {t(label)}
                 </StepButton>
               </Link>
             </Step>

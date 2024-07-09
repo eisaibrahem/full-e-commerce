@@ -16,6 +16,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
@@ -63,6 +64,7 @@ export default function Details() {
     localStorage.setItem("activeStep", "1");
   }, []);
 
+  const t = useTranslations("cart");
   return (
     <Stack
       component={motion.section}
@@ -76,7 +78,7 @@ export default function Details() {
     >
       <Stack sx={{ flexGrow: 2, gap: 3 }}>
         <Paper sx={{ p: 2 }}>
-          <Typography variant="subtitle1">Shipping Address</Typography>
+          <Typography variant="subtitle1">{t("shippingAddress")}</Typography>
 
           <Stack
             direction={"row"}
@@ -89,31 +91,31 @@ export default function Details() {
               <TextField
                 size="small"
                 id="outlined-textarea"
-                label="Full Name"
-                placeholder="Full Name"
+                label={t("fullName")}
+                placeholder={t("fullName")}
                 multiline
               />
               <TextField
                 size="small"
                 id="outlined-textarea"
                 type="number"
-                label="Phone Number"
-                placeholder="Phone Number"
+                label={t("phoneNumber")}
+                placeholder={t("phoneNumber")}
                 multiline
               />
               <TextField
                 size="small"
                 id="outlined-textarea"
                 type="number"
-                label="Zip code"
-                placeholder="Zip code"
+                label={t("zipCode")}
+                placeholder={t("zipCode")}
                 multiline
               />
               <TextField
                 size="small"
                 id="outlined-textarea"
-                label="address1"
-                placeholder="address1"
+                label={t("address1")}
+                placeholder={t("address1")}
                 multiline
               />
             </Stack>
@@ -122,29 +124,29 @@ export default function Details() {
                 size="small"
                 id="outlined-textarea"
                 type="email"
-                label="Email"
-                placeholder="Email"
+                label={t("email")}
+                placeholder={t("email")}
                 multiline
               />
               <TextField
                 size="small"
                 id="outlined-textarea"
-                label="Company"
-                placeholder="Company"
+                label={t("city")}
+                placeholder={t("city")}
                 multiline
               />
               <TextField
                 size="small"
                 id="outlined-textarea"
-                label="Country"
-                placeholder="Country"
+                label={t("state")}
+                placeholder={t("state")}
                 multiline
               />
               <TextField
                 size="small"
                 id="outlined-textarea"
-                label="address2"
-                placeholder="address2"
+                label={t("address2")}
+                placeholder={t("address2")}
                 multiline
               />
             </Stack>
@@ -162,7 +164,7 @@ export default function Details() {
             variant="outlined"
             color="error"
           >
-            Back To Cart
+            {t("Back To Cart")}
           </Button>
 
           <Link href="payment" style={{ flexGrow: 1 }}>
@@ -172,7 +174,7 @@ export default function Details() {
               variant="contained"
               color="error"
             >
-              Proceed To Payment
+              {t("Proceed To Payment")}
             </Button>
           </Link>
         </Stack>
@@ -185,7 +187,7 @@ export default function Details() {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Typography variant="body1">SubTotal:</Typography>
+            <Typography variant="body1">{t("subtotal")}:</Typography>
             <Typography variant="body1" sx={{ fontWeight: "bold" }}>
               ${total.toFixed(2)}
             </Typography>
@@ -195,7 +197,7 @@ export default function Details() {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Typography variant="body1">Shipping:</Typography>
+            <Typography variant="body1">{t("shipping")}:</Typography>
             <Typography variant="body1">-</Typography>
           </Stack>
           <Stack
@@ -203,12 +205,12 @@ export default function Details() {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Typography variant="body1">Tax:</Typography>
+            <Typography variant="body1">{t("tax")}:</Typography>
             <Typography variant="body1" sx={{ fontWeight: "bold" }}>
               $40.00
             </Typography>
           </Stack>
-          <Typography variant="body1">Discount:</Typography>
+          <Typography variant="body1">{t("discount")}:</Typography>
           <Divider />
           <Typography variant="h5" sx={{ fontWeight: "bold", my: 1 }}>
             ${(total + 40).toFixed(2)}
@@ -216,12 +218,12 @@ export default function Details() {
           <TextField
             size="small"
             id="outlined-textarea"
-            label="Multiline Placeholder"
-            placeholder="Voucher"
+            label={t("voucher")}
+            placeholder="EISA-545"
             multiline
           />
           <Button variant="outlined" color="error">
-            Checkout
+            {t("checkout")}
           </Button>
         </Stack>
       </Paper>

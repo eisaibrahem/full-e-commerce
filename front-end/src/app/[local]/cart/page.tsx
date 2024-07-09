@@ -24,12 +24,15 @@ import {
 } from "@/atoms/stepperAtoms";
 import Link from "next/link";
 import MyListItem from "@/app/Components/cart/MylistItem";
+import { useTranslations } from "next-intl";
 
-const currencies = [
-  { value: "USD", label: "$" },
-  { value: "EUR", label: "€" },
-  { value: "BTC", label: "฿" },
-  { value: "JPY", label: "¥" },
+const states = [
+  { value: "20", label: "القاهرة" },
+  { value: "50", label: "الاسكندرية" },
+  { value: "30", label: "الجيزة" },
+  { value: "40", label: "البحيرة" },
+  { value: "50", label: "الدقهلية" },
+  { value: "60", label: "دمياط" },
 ];
 
 type CartProps = {
@@ -96,6 +99,7 @@ export default function Cart({ local }: any) {
     localStorage.setItem("activeStep", "0");
   }, []);
 
+  const t = useTranslations("cart");
   return (
     <Stack
       component={motion.section}
@@ -104,32 +108,44 @@ export default function Cart({ local }: any) {
       gap={3}
       flexWrap="wrap"
     >
-      <Stack
-        gap={3}
-        component="nav"
-        aria-label="Device settings"
-        sx={{
-          m: 0,
-          py: 0,
-          px: "0px",
-          ".MuiListItem-root": { p: "5px" },
-          background: "backgroundSelector.main",
-          flexGrow: 2,
-        }}
-      >
-        {
-          // @ts-ignore
-          drawerData.map((item: CartItem, index: number) => (
-            <MyListItem
-              key={index}
-              item={item}
-              index={index}
-              updateItemCount={updateItemCount}
-              removeItem={removeItem}
-            />
-          ))
-        }
-      </Stack>
+      {
+        <Stack
+          gap={3}
+          component="nav"
+          aria-label="Device settings"
+          sx={{
+            m: 0,
+            py: 0,
+            px: "0px",
+            ".MuiListItem-root": { p: "5px" },
+            background: "backgroundSelector.main",
+            flexGrow: 2,
+          }}
+        >
+          {drawerData.length === 0 ? (
+            <Typography
+              variant="h5"
+              textAlign={"center"}
+              align="center"
+              my={"auto"}
+              color={"#aaa"}
+            >
+              {t("emptyCart")}
+            </Typography>
+          ) : (
+            // @ts-ignore
+            drawerData.map((item: CartItem, index: number) => (
+              <MyListItem
+                key={index}
+                item={item}
+                index={index}
+                updateItemCount={updateItemCount}
+                removeItem={removeItem}
+              />
+            ))
+          )}
+        </Stack>
+      }
 
       <Paper sx={{ flexGrow: 1, p: 2 }}>
         <Stack direction="row" justifyContent="space-between">
@@ -137,7 +153,7 @@ export default function Cart({ local }: any) {
             variant="body1"
             sx={{ fontWeight: "bold", color: "#aaa" }}
           >
-            Total :
+            {t("total")} :
           </Typography>
           <Typography variant="body1" sx={{ fontWeight: "bold" }}>
             ${total}
@@ -151,48 +167,49 @@ export default function Cart({ local }: any) {
             justifyContent="start"
             gap={1}
           >
-            <Typography variant="body2">Additional Comments</Typography>
+            <Typography variant="body2">{t("AdditionalComments")}</Typography>
             <Typography
               variant="body2"
-              color="primary"
               px={1}
               py={0.3}
               sx={{
                 borderRadius: "5px",
                 bgcolor: "#f8d7da",
+                color: "#721c24",
+                fontSize: "12px",
               }}
             >
-              Note
+              {t("Note")}
             </Typography>
           </Stack>
           <TextField
             size="small"
             id="outlined-multiline-static"
-            label="Multiline"
+            label={t("Comments")}
             multiline
             rows={4}
           />
           <TextField
             size="small"
             id="outlined-textarea"
-            label="Multiline Placeholder"
-            placeholder="Voucher"
+            label={t("voucher")}
+            placeholder="EISA199"
             multiline
           />
           <Button variant="outlined" color="error" sx={{ width: "100%" }}>
-            Apply Voucher
+            {t("applayVoucher")}
           </Button>
           <Divider sx={{ my: 1 }} />
-          <Typography variant="body1">Shipping Estimates</Typography>
+          <Typography variant="body1">{t("ShippingEstimates")}</Typography>
           <TextField
             size="small"
             id="outlined-select-currency"
             select
-            label="Select"
+            label={t("state")}
             defaultValue="EUR"
             helperText="Please select your currency"
           >
-            {currencies.map((option) => (
+            {states.map((option) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
@@ -201,12 +218,12 @@ export default function Cart({ local }: any) {
           <TextField
             size="small"
             id="outlined-textarea"
-            label="Multiline Placeholder"
-            placeholder="Zip Code"
+            label={t("zipCode")}
+            placeholder="1225"
             multiline
           />
           <Button variant="outlined" color="error" sx={{ width: "100%" }}>
-            Apply Voucher
+            {t("applayVoucher")}
           </Button>
           <Link href={`cart/details`}>
             <Button
@@ -215,7 +232,7 @@ export default function Cart({ local }: any) {
               color="error"
               sx={{ width: "100%" }}
             >
-              Check Out
+              {t("checkout")}
             </Button>
           </Link>
         </Stack>
