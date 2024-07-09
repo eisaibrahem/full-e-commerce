@@ -12,10 +12,12 @@ import {
   Stepper,
   styled,
 } from "@mui/material";
+import Link from "next/link";
 import React from "react";
 import { useRecoilState } from "recoil";
+import { Navigation } from "swiper/modules";
 
-export default function MyStepper() {
+export default function MyStepper({ local }: { local: string }) {
   const [theme, colorMode] = useMode();
 
   const [steps, setSteps] = useRecoilState(stepsAtom);
@@ -62,12 +64,12 @@ export default function MyStepper() {
     setActiveStep(step);
   };
 
-  const handleComplete = () => {
-    const newCompleted = completed;
-    newCompleted[activeStep] = true;
-    setCompleted(newCompleted);
-    handleNext();
-  };
+  //   const handleComplete = () => {
+  //     const newCompleted = completed;
+  //     newCompleted[activeStep] = true;
+  //     setCompleted(newCompleted);
+  //     handleNext();
+  //   };
 
   const handleReset = () => {
     setActiveStep(0);
@@ -159,13 +161,32 @@ export default function MyStepper() {
                 },
               }}
             >
-              <StepButton
-                color="inherit"
-                sx={{ fontWeight: "bold", color: "white" }}
-                onClick={handleStep(index)}
+              <Link
+                href={
+                  index === 0
+                    ? `/${local}/cart`
+                    : index === 1
+                    ? "details"
+                    : "payment"
+                }
               >
-                {label}
-              </StepButton>
+                <StepButton
+                  color="inherit"
+                  sx={{
+                    fontWeight: "bold",
+                    color: "white",
+                    px: 1.2,
+                    py: 0.6,
+                    my: -0.6,
+                    mx: -1.2,
+
+                    borderRadius: "25px",
+                  }}
+                  onClick={handleStep(index)}
+                >
+                  {label}
+                </StepButton>
+              </Link>
             </Step>
           ))}
         </Stepper>
