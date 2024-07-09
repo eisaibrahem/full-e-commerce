@@ -31,6 +31,8 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import RightDrawer from "./drawers/RightDrawer";
+import { useRecoilState } from "recoil";
+import CartAtom from "@/atoms/cart-atom";
 
 const options = ["All Categories", "Cars", "Electronics", "Clothes", "Shoes"];
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({

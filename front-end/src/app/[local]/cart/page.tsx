@@ -124,5 +124,5 @@ export default function Page({
       borderRadius: 1,
     },
   }));
-  return <Cart total={total} setTotal={setTotal} handleNext={handleNext} />;
+  return <Cart local={local} />;
 }

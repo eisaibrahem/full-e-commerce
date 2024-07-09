@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import { useEffect } from "react";
 import { NextPage } from "next";
 import {
   Box,
@@ -27,6 +28,12 @@ import {
   CreditCard as PaymentIcon,
   ChevronRight as ChevronRightIcon,
 } from "@mui/icons-material";
+import { useRecoilState } from "recoil";
+import {
+  activeStepAtom,
+  completedStepsAtom,
+  stepsAtom,
+} from "@/atoms/stepperAtoms";
 
 interface Order {
   id: string;
@@ -68,7 +75,32 @@ const orders: Order[] = [
   },
 ];
 
+const activeStep = Number(localStorage.getItem("activeStep"));
 const OrdersPage: NextPage = () => {
+  const [steps, setSteps] = useRecoilState(stepsAtom);
+  const [activeStep, setActiveStep] = useRecoilState(activeStepAtom);
+  const [completed, setCompleted] = useRecoilState(completedStepsAtom);
+
+  const totalSteps = () => {
+    return steps.length;
+  };
+
+  const completedSteps = () => {
+    return Object.keys(completed).length;
+  };
+
+  const isLastStep = () => {
+    return activeStep === totalSteps() - 1;
+  };
+  const allStepsCompleted = () => {
+    return completedSteps() === totalSteps();
+  };
+
+  useEffect(() => {
+    setActiveStep(3);
+    localStorage.setItem("activeStep", "3");
+  }, []);
+
   return (
     <Box sx={{ display: "flex" }}>
       {/* Sidebar */}

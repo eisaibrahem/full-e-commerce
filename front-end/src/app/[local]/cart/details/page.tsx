@@ -12,8 +12,6 @@ import {
 import { motion } from "framer-motion";
 import React from "react";
 
-export default function Page({ total, handleBack, handleNext }: any) {
-  return (
-    <Details total={total} handleBack={handleBack} handleNext={handleNext} />
-  );
+export default function Page() {
+  return <Details />;
 }

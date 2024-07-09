@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Button,
@@ -10,14 +11,58 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import { totalAtom } from "@/atoms/cart-atom";
+import { useRecoilState } from "recoil";
+import Link from "next/link";
+import {
+  activeStepAtom,
+  completedStepsAtom,
+  stepsAtom,
+} from "@/atoms/stepperAtoms";
 
-export default function Payment({ total, handleBack, handleNext }: any) {
+export default function Payment() {
+  const [total, setTotal] = useRecoilState(totalAtom);
+
+  const [steps, setSteps] = useRecoilState(stepsAtom);
+  const [activeStep, setActiveStep] = useRecoilState(activeStepAtom);
+  const [completed, setCompleted] = useRecoilState(completedStepsAtom);
+
+  const totalSteps = () => {
+    return steps.length;
+  };
+
+  const completedSteps = () => {
+    return Object.keys(completed).length;
+  };
+
+  const isLastStep = () => {
+    return activeStep === totalSteps() - 1;
+  };
+
+  const allStepsCompleted = () => {
+    return completedSteps() === totalSteps();
+  };
+
+  const handleNext = () => {
+    // const newActiveStep =
+    //   isLastStep() && !allStepsCompleted()
+    //     ? // It's the last step, but not all steps have been completed,
+    //       // find the first step that has been completed
+    //       steps.findIndex((step, i) => !(i in completed))
+    //     : activeStep + 1;
+    // setActiveStep(newActiveStep);
+    // localStorage.setItem("activeStep", newActiveStep.toString());
+  };
+
+  const handleBack = () => {
+    window.history.back();
+  };
   const [selectedValue, setSelectedValue] = React.useState(
     "Pay with credit card"
   );
@@ -25,6 +70,10 @@ export default function Payment({ total, handleBack, handleNext }: any) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedValue(event.target.value);
   };
+  useEffect(() => {
+    setActiveStep(2);
+    localStorage.setItem("activeStep", "2");
+  }, []);
   return (
     <Stack
       component={motion.section}
@@ -152,14 +201,16 @@ export default function Payment({ total, handleBack, handleNext }: any) {
           >
             Back To Checkout
           </Button>
-          <Button
-            onClick={handleNext}
-            sx={{ flexGrow: 1 }}
-            variant="contained"
-            color="error"
-          >
-            Review
-          </Button>
+          <Link href="review">
+            <Button
+              onClick={handleNext}
+              sx={{ flexGrow: 1 }}
+              variant="contained"
+              color="error"
+            >
+              Review
+            </Button>
+          </Link>
         </Stack>
       </Stack>
 

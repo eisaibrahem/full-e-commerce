@@ -6,10 +6,10 @@ import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+
 import { ColorModeContext, useMode } from "@/theme";
 import {
+  Button,
   Container,
   CssBaseline,
   Divider,
@@ -27,6 +27,9 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import Payment from "@/app/Components/cart/Payment";
 import OrdersPage from "@/app/Components/cart/review";
+import { RecoilRoot } from "recoil";
+import Link from "next/link";
+import MyStepper from "@/app/Components/cart/MyStepper";
 
 const steps = ["Cart", "Details", "Payment", "Review"];
 
@@ -45,7 +48,7 @@ export default function Layout({
     messages = {}; // Provide an empty object or a default set of messages
   }
   const [theme, colorMode] = useMode();
-  const [total, setTotal] = useState(0);
+
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState<{
     [k: number]: boolean;
@@ -84,6 +87,7 @@ export default function Layout({
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    window.history.back();
   };
 
   const handleStep = (step: number) => () => {
@@ -127,117 +131,71 @@ export default function Layout({
     },
   }));
   return (
-    <Box>
-      <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <IntlProvider messages={messages} locale={local}>
-            <Header local={local} isCart={true} />
-            {/* @ts-ignore */}
-            <Box sx={{ bgcolor: theme.palette.bgColor.main, py: 2, mt: 3 }}>
-              <Container>
-                {activeStep !== 3 && (
-                  <Stepper
-                    activeStep={activeStep}
-                    connector={<ColorlibConnector />}
-                    sx={{
-                      flexWrap: "wrap",
-                      textAlign: "center",
-                      mx: "auto",
-                      width: "60%",
-                      mb: 2,
-                      ".MuiTouchRipple-root": {},
-                      ".MuiStep-root": {
-                        bgcolor: primaryColor,
-                      },
-
-                      display: { xs: "none", sm: "flex" },
-                    }}
+    <RecoilRoot>
+      <Box>
+        <ColorModeContext.Provider value={colorMode}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <IntlProvider messages={messages} locale={local}>
+              <Header local={local} isCart={true} />
+              {/* @ts-ignore */}
+              <Box sx={{ bgcolor: theme.palette.bgColor.main, py: 2, mt: 3 }}>
+                <Container>
+                  <MyStepper />
+                  {children}
+                  {/* <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    mt={2}
+                    gap={2}
+                    flexWrap={"wrap"}
+                    alignItems={"center"}
                   >
-                    {steps.map((label, index) => (
-                      <Step
-                        key={label}
-                        completed={completed[index]}
-                        sx={{
-                          my: 1,
-                          py: 0.5,
-                          px: 1.5,
-
-                          borderRadius: "25px",
-                          display: "flex",
-
-                          mx: "0",
-                          ".MuiStepLabel-label": {
-                            fontWeight: "bold !important",
-
-                            color: secondaryColor,
-                          },
-
-                          ".Mui-completed": {
-                            color: "white !important",
-                          },
-                          ".Mui-active": {
-                            color: "#fff !important",
-                          },
-
-                          circle: {
-                            color: "white !important",
-                            opacity: "0.2 ",
-                            backgroundColor: "white !important",
-                          },
-                          " .MuiStepIcon-text": {
-                            fill: "white !important",
-                            color: "white !important",
-                          },
-                          ".MuiSvgIcon-root": {
-                            color: "white !important",
-                          },
-                        }}
+                    {activeStep > 0 && (
+                      <Button
+                        onClick={handleBack}
+                        variant="outlined"
+                        color="error"
                       >
-                        <StepButton
-                          color="inherit"
-                          sx={{ fontWeight: "bold", color: "white" }}
-                          onClick={handleStep(index)}
+                        {activeStep === 1
+                          ? "Back To Cart"
+                          : activeStep === 2
+                          ? "Back To Checkout"
+                          : "Back To Payment"}
+                      </Button>
+                    )}
+                    {activeStep < 3 && (
+                      <Link
+                        style={{ marginLeft: "auto" }}
+                        href={
+                          activeStep === 0
+                            ? "cart/details"
+                            : activeStep === 1
+                            ? "payment"
+                            : "review"
+                        }
+                      >
+                        <Button
+                          sx={{ width: "400px" }}
+                          variant="contained"
+                          color="error"
+                          onClick={handleNext}
                         >
-                          {label}
-                        </StepButton>
-                      </Step>
-                    ))}
-                  </Stepper>
-                )}
-
-                {
-                  <Box>
-                    <AnimatePresence>
-                      {activeStep === 0 ? (
-                        <Cart
-                          total={total}
-                          setTotal={setTotal}
-                          handleNext={handleNext}
-                        />
-                      ) : activeStep === 1 ? (
-                        <Details
-                          total={total}
-                          handleBack={handleBack}
-                          handleNext={handleNext}
-                        />
-                      ) : activeStep === 2 ? (
-                        <Payment
-                          total={total}
-                          handleBack={handleBack}
-                          handleNext={handleNext}
-                        />
-                      ) : (
-                        activeStep === 3 && <OrdersPage />
-                      )}
-                    </AnimatePresence>
-                  </Box>
-                }
-              </Container>
-            </Box>
-          </IntlProvider>
-        </ThemeProvider>
-      </ColorModeContext.Provider>
-    </Box>
+                          {activeStep === 0
+                            ? "Check Out"
+                            : activeStep === 1
+                            ? "Proccess to Payment"
+                            : "review"}
+                        </Button>
+                      </Link>
+                    )}
+                  </Stack> */}
+                </Container>
+              </Box>
+            </IntlProvider>
+          </ThemeProvider>
+        </ColorModeContext.Provider>
+      </Box>
+    </RecoilRoot>
   );
 }

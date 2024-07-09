@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import { store } from "@/Redux/store";
 import { useRouter } from "next/router";
 import { IntlProvider } from "next-intl";
+import { RecoilRoot } from "recoil";
 
 export default function Home({
   params: { local },
@@ -28,24 +29,26 @@ export default function Home({
   }
 
   return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Provider store={store}>
-          {/* @ts-ignore */}
-          <IntlProvider messages={messages} locale={local}>
-            <Box>
-              <Header local={local} isCart={false} />
-              {/* @ts-ignore */}
-              <Box bgcolor={theme.palette.bgColor.main}>
-                <Hero />
+    <RecoilRoot>
+      <ColorModeContext.Provider value={colorMode}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Provider store={store}>
+            {/* @ts-ignore */}
+            <IntlProvider messages={messages} locale={local}>
+              <Box>
+                <Header local={local} isCart={false} />
+                {/* @ts-ignore */}
+                <Box bgcolor={theme.palette.bgColor.main}>
+                  <Hero />
+                </Box>
+                <Products />
+                <ScrollToTop />
               </Box>
-              <Products />
-              <ScrollToTop />
-            </Box>
-          </IntlProvider>
-        </Provider>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+            </IntlProvider>
+          </Provider>
+        </ThemeProvider>
+      </ColorModeContext.Provider>
+    </RecoilRoot>
   );
 }

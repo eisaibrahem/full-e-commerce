@@ -27,6 +27,7 @@ export default function LocaleLayout({
       {/* <IntlProvider messages={messages} locale={local}> */}
       <body className={inter.className}>
         {children}
+
         <Footer />
       </body>
       {/* </IntlProvider> */}

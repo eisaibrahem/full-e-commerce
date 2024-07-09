@@ -1,4 +1,5 @@
 "use client";
+import CartAtom from "@/atoms/cart-atom";
 import { Add, Close, Remove, ShoppingCart } from "@mui/icons-material";
 import {
   Box,
@@ -13,38 +14,20 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
 export default function RightDrawer({ setIsDrawerOpen, local }: any) {
-  const [drowerData, setDrowerData] = useState([
-    {
-      title: "Denim Blue Jeans",
-      price: 134,
-      image: "/assets/images/DenimBlueJeans.png",
-      count: 1,
-    },
-    {
-      title: "Yellow Casual Sweater",
-      price: 80,
-      image: "/assets/images/YellowCasualSweater.png",
-      count: 1,
-    },
-    {
-      title: "Silver High Neck Sweater",
-      price: 220,
-      image: "/assets/images/SilverHighNeckSweater.png",
-      count: 1,
-    },
-  ]);
+  const [drawerData, setDrawerData] = useRecoilState(CartAtom);
 
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const newTotal = drowerData.reduce(
+    const newTotal = drawerData.reduce(
       (acc, item) => acc + item.price * item.count,
       0
     );
     setTotal(newTotal);
-  }, [drowerData]);
+  }, [drawerData]);
 
   const updateItemCount = ({
     index,
@@ -53,7 +36,7 @@ export default function RightDrawer({ setIsDrawerOpen, local }: any) {
     index: number;
     newCount: number;
   }) => {
-    setDrowerData((prevData) =>
+    setDrawerData((prevData) =>
       prevData.map((item, i) =>
         i === index ? { ...item, count: newCount } : item
       )
@@ -61,7 +44,7 @@ export default function RightDrawer({ setIsDrawerOpen, local }: any) {
   };
 
   const removeItem = (index: number) => {
-    setDrowerData((prevData) => prevData.filter((_, i) => i !== index));
+    setDrawerData((prevData) => prevData.filter((_, i) => i !== index));
   };
 
   return (
@@ -74,7 +57,7 @@ export default function RightDrawer({ setIsDrawerOpen, local }: any) {
       >
         <Stack direction={"row"} gap={2} alignItems={"center"}>
           <ShoppingCart />
-          <Typography variant="body1">{drowerData.length} Items</Typography>
+          <Typography variant="body1">{drawerData.length} Items</Typography>
         </Stack>
         <IconButton sx={{ p: 0.5 }} onClick={() => setIsDrawerOpen(false)}>
           <Close style={{ fontSize: "20px" }} />
@@ -95,7 +78,7 @@ export default function RightDrawer({ setIsDrawerOpen, local }: any) {
           background: "backgroundSelector.main",
         }}
       >
-        {drowerData.map((item, index) => (
+        {drawerData.map((item, index) => (
           <MyListItem
             key={index}
             item={item}

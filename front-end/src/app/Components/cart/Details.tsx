@@ -1,3 +1,10 @@
+"use client";
+import { totalAtom } from "@/atoms/cart-atom";
+import {
+  activeStepAtom,
+  completedStepsAtom,
+  stepsAtom,
+} from "@/atoms/stepperAtoms";
 import {
   Button,
   Container,
@@ -9,9 +16,53 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import React from "react";
+import Link from "next/link";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
 
-export default function Details({ total, handleBack, handleNext }: any) {
+export default function Details() {
+  const [total, setTotal] = useRecoilState(totalAtom);
+
+  const [steps, setSteps] = useRecoilState(stepsAtom);
+  const [activeStep, setActiveStep] = useRecoilState(activeStepAtom);
+  const [completed, setCompleted] = useRecoilState(completedStepsAtom);
+
+  const totalSteps = () => {
+    return steps.length;
+  };
+
+  const completedSteps = () => {
+    return Object.keys(completed).length;
+  };
+
+  const isLastStep = () => {
+    return activeStep === totalSteps() - 1;
+  };
+
+  const allStepsCompleted = () => {
+    return completedSteps() === totalSteps();
+  };
+
+  const handleNext = () => {
+    // const newActiveStep =
+    //   isLastStep() && !allStepsCompleted()
+    //     ? // It's the last step, but not all steps have been completed,
+    //       // find the first step that has been completed
+    //       steps.findIndex((step, i) => !(i in completed))
+    //     : activeStep + 1;
+    // setActiveStep(newActiveStep);
+    // localStorage.setItem("activeStep", newActiveStep.toString());
+  };
+
+  const handleBack = () => {
+    window.history.back();
+  };
+
+  useEffect(() => {
+    setActiveStep(1);
+    localStorage.setItem("activeStep", "1");
+  }, []);
+
   return (
     <Stack
       component={motion.section}
@@ -113,14 +164,17 @@ export default function Details({ total, handleBack, handleNext }: any) {
           >
             Back To Cart
           </Button>
-          <Button
-            onClick={handleNext}
-            sx={{ flexGrow: 1 }}
-            variant="contained"
-            color="error"
-          >
-            Proceed To Payment
-          </Button>
+
+          <Link href="payment" style={{ flexGrow: 1 }}>
+            <Button
+              sx={{ width: "100%" }}
+              onClick={handleNext}
+              variant="contained"
+              color="error"
+            >
+              Proceed To Payment
+            </Button>
+          </Link>
         </Stack>
       </Stack>
 
