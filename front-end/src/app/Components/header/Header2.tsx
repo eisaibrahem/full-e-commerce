@@ -113,6 +113,8 @@ export default function Header2({ local }: { local: string }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   // @ts-ignore
   const bgSelector = theme.palette.backgroundSelector.main;
+
+  const [drawerData, setDrawerData] = useRecoilState(CartAtom);
   return (
     <Container sx={{ mt: 1 }}>
       <Stack
@@ -216,7 +218,7 @@ export default function Header2({ local }: { local: string }) {
             onClick={() => setIsDrawerOpen((prev) => !prev)}
           >
             <StyledBadge
-              badgeContent={4}
+              badgeContent={drawerData.length}
               color="primary"
               anchorOrigin={{
                 vertical: "top",

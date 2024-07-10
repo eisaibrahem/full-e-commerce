@@ -27,6 +27,7 @@ export default function Products() {
       <MainProducts
         setOpen={setOpen}
         setclickedProduct={setclickedProduct}
+        clickedProduct={clickedProduct}
         myDate={myDate}
       />
       <Dialog

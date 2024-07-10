@@ -8,13 +8,19 @@ import { useState } from "react";
 import Loading from "../loading/Loading";
 import { useGetProductByNameQuery } from "@/Redux/Product";
 import { useTranslations } from "next-intl";
+import { useRecoilState } from "recoil";
+import CartAtom from "@/atoms/cart-atom";
 
 const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE;
 export default function ProductsDetails({ clickedProduct, myDate }: any) {
   const [selectedImg, setSelectedImg] = useState(0);
   const t = useTranslations("productDetails");
   const { data, error, isLoading } = useGetProductByNameQuery(myDate);
+  const [drawerData, setDrawerData] = useRecoilState(CartAtom);
 
+  const addToCart = () => {
+    setDrawerData([...drawerData, clickedProduct]);
+  };
   return error ? (
     <>{error}</>
   ) : (
@@ -132,6 +138,9 @@ export default function ProductsDetails({ clickedProduct, myDate }: any) {
           </Stack>
 
           <Button
+            onClick={() => {
+              addToCart();
+            }}
             sx={{ mb: { xs: 1, sm: 0 }, textTransform: "capitalize" }}
             variant="contained"
           >

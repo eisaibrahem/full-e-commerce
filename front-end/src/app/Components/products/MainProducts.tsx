@@ -15,12 +15,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useGetProductByNameQuery } from "@/Redux/Product";
 import Loading from "../loading/Loading";
 import { useTranslations } from "next-intl";
+import { useRecoilState } from "recoil";
+import CartAtom from "@/atoms/cart-atom";
 
 const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE;
 export default function MainProducts({
   myDate,
   setOpen,
   setclickedProduct,
+  clickedProduct,
 }: any) {
   const t = useTranslations("mainProducts");
   const handleClickOpen = () => {
@@ -28,6 +31,13 @@ export default function MainProducts({
   };
 
   const { data, error, isLoading } = useGetProductByNameQuery(myDate);
+  const [drawerData, setDrawerData] = useRecoilState(CartAtom);
+
+  // convert data to work with drawerData
+
+  const addToCart = () => {
+    setDrawerData([...drawerData, clickedProduct]);
+  };
 
   return error ? (
     <>{error}</>
@@ -109,8 +119,17 @@ export default function MainProducts({
                 <CardActions sx={{ justifyContent: "space-between" }}>
                   <Button
                     onClick={() => {
-                      handleClickOpen();
-                      setclickedProduct(item);
+                      // handleClickOpen();
+                      // setclickedProduct(item);
+                      setDrawerData([
+                        ...drawerData,
+                        {
+                          title: item.attributes.productTitle,
+                          price: item.attributes.productPrice,
+                          image: `${item.attributes.productImage.data[0].attributes.url}`,
+                          count: 1,
+                        },
+                      ]);
                     }}
                     sx={{ textTransform: "capitalize" }}
                     size="large"

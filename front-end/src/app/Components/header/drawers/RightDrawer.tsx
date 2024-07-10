@@ -48,7 +48,13 @@ export default function RightDrawer({ setIsDrawerOpen, local }: any) {
   };
 
   return (
-    <Box p={2} position={"relative"} height={"100vh"} overflow={"hidden"}>
+    <Box
+      py={1}
+      px={0}
+      position={"relative"}
+      height={"100vh"}
+      overflow={"hidden"}
+    >
       <Stack
         direction={"row"}
         justifyContent={"space-between"}
@@ -71,11 +77,14 @@ export default function RightDrawer({ setIsDrawerOpen, local }: any) {
         aria-label="Device settings"
         sx={{
           m: "0",
+          mb: 2,
           py: "0",
           px: "0px",
-          ".MuiListItem-root": { p: "5px" },
+          ".MuiListItem-root": { p: "0px" },
           // @ts-ignore
           background: "backgroundSelector.main",
+          height: "72%",
+          overflow: "auto",
         }}
       >
         {drawerData.map((item, index) => (
@@ -91,7 +100,6 @@ export default function RightDrawer({ setIsDrawerOpen, local }: any) {
 
       <Stack
         gap={2}
-        position={"fixed"}
         bottom={"10px"}
         right={"10px"}
         maxWidth={380}
