@@ -108,8 +108,25 @@
     "Exp Date": "تاريخ الانتهاء",
     "Name On Card": "الاسم على البطاقة",
     "Submit": "ارسال",
-    "review": "مراجعة",
+    "review": "متابعة الشحنات",
     "Back To Checkout": "العودة للتفاصيل",
-    "emptyCart": "عربة التسوق فارغة"
+    "emptyCart": "عربة التسوق فارغة",
+    "My Orders": "طلباتي",
+    "DASHBOARD": "لوحة التحكم",
+    "Orders": "طلبات",
+    "Order ID": "رقم الطلب",
+    "Status": "الحالة",
+    "Date": "التاريخ",
+    "Amount": "المبلغ",
+    "ACCOUNT SETTINGS": "اعدادات الحساب",
+    "Payment Methods": "طرق الدفع",
+    "Addresses": "العناوين",
+    "Profile Info": "معلومات الملف الشخصي",
+    "Wishlist": "قائمة المفضلات",
+    "Support Tickets": "تذكرة الدعم",
+    "Pending": "قيد الانتظار",
+    "Delivered": "تم التوصيل",
+    "Cancelled": "ملغي",
+    "Processing": "معالجة"
   }
 }

@@ -34,6 +34,7 @@ import {
   completedStepsAtom,
   stepsAtom,
 } from "@/atoms/stepperAtoms";
+import { useTranslations } from "next-intl";
 
 interface Order {
   id: string;
@@ -46,31 +47,31 @@ const orders: Order[] = [
   {
     id: "f0ba538b-c8f3-45ce",
     status: "Pending",
-    date: "Nov 10, 2022",
+    date: "Nov 10, 2024",
     amount: 350.0,
   },
   {
     id: "1f10985b-09a8-4d93",
     status: "Processing",
-    date: "Nov 10, 2022",
+    date: "Nov 10, 2024",
     amount: 500.0,
   },
   {
     id: "6d54d506-208a-43bb",
     status: "Delivered",
-    date: "Dec 22, 2020",
+    date: "Dec 22, 2023",
     amount: 700.0,
   },
   {
     id: "63d35462-520b-4566",
     status: "Delivered",
-    date: "Nov 20, 2020",
+    date: "Nov 20, 2023",
     amount: 700.0,
   },
   {
     id: "753deee0-56b3-40a7",
     status: "Cancelled",
-    date: "Dec 14, 2020",
+    date: "Dec 14, 2023",
     amount: 300.0,
   },
 ];
@@ -100,60 +101,60 @@ const OrdersPage: NextPage = () => {
     setActiveStep(3);
     localStorage.setItem("activeStep", "3");
   }, []);
-
+  const t = useTranslations("cart");
   return (
     <Box sx={{ display: "flex" }}>
       {/* Sidebar */}
       <Box sx={{ width: 250, bgcolor: "background.paper" }}>
         <Typography variant="h6" sx={{ p: 2 }}>
-          DASHBOARD
+          {t("DASHBOARD")}
         </Typography>
         <List>
           <ListItem button selected>
             <ListItemIcon>
               <OrderIcon color="error" />
             </ListItemIcon>
-            <ListItemText primary="Orders" />
+            <ListItemText primary={t("Orders")} />
             <Typography>5</Typography>
           </ListItem>
           <ListItem button>
             <ListItemIcon>
               <WishlistIcon />
             </ListItemIcon>
-            <ListItemText primary="Wishlist" />
+            <ListItemText primary={t("Wishlist")} />
             <Typography>19</Typography>
           </ListItem>
           <ListItem button>
             <ListItemIcon>
               <SupportIcon />
             </ListItemIcon>
-            <ListItemText primary="Support Tickets" />
+            <ListItemText primary={t("Support Tickets")} />
             <Typography>1</Typography>
           </ListItem>
         </List>
         <Typography variant="h6" sx={{ p: 2 }}>
-          ACCOUNT SETTINGS
+          {t("ACCOUNT SETTINGS")}
         </Typography>
         <List>
           <ListItem button>
             <ListItemIcon>
               <ProfileIcon />
             </ListItemIcon>
-            <ListItemText primary="Profile Info" />
+            <ListItemText primary={t("Profile Info")} />
             <Typography>3</Typography>
           </ListItem>
           <ListItem button>
             <ListItemIcon>
               <AddressIcon />
             </ListItemIcon>
-            <ListItemText primary="Addresses" />
+            <ListItemText primary={t("Addresses")} />
             <Typography>16</Typography>
           </ListItem>
           <ListItem button>
             <ListItemIcon>
               <PaymentIcon />
             </ListItemIcon>
-            <ListItemText primary="Payment Methods" />
+            <ListItemText primary={t("Payment Methods")} />
             <Typography>4</Typography>
           </ListItem>
         </List>
@@ -163,16 +164,16 @@ const OrdersPage: NextPage = () => {
       <Box sx={{ flexGrow: 1, p: 3 }}>
         <Typography variant="h4" gutterBottom>
           <OrderIcon color="error" sx={{ mr: 1, verticalAlign: "middle" }} />
-          My Orders
+          {t("My Orders")}
         </Typography>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Order ID</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell align="right">Amount</TableCell>
+                <TableCell>{t("Order ID")}</TableCell>
+                <TableCell>{t("Status")}</TableCell>
+                <TableCell>{t("Date")}</TableCell>
+                <TableCell align="right">{t("Amount")}</TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
@@ -182,7 +183,7 @@ const OrdersPage: NextPage = () => {
                   <TableCell>{order.id}</TableCell>
                   <TableCell>
                     <Chip
-                      label={order.status}
+                      label={t(order.status)}
                       color={
                         order.status === "Delivered"
                           ? "success"

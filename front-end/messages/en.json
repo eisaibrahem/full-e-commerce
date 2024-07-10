@@ -110,6 +110,23 @@
         "Name On Card": "Name On Card",
         "Submit": "Submit",
         "review": "Review",
-        "Back To Checkout": "Back To Checkout"
+        "Back To Checkout": "Back To Checkout",
+        "My Orders": "My Orders",
+        "DASHBOARD": "DASHBOARD",
+        "Orders": "Orders",
+        "Order ID": "Orders Id",
+        "Status": "Status",
+        "Date": "Date",
+        "Amount": "Amount",
+        "ACCOUNT SETTINGS": "ACCOUNT SETTINGS",
+        "Payment Methods": "Payment Methods",
+        "Addresses": "Addresses",
+        "Profile Info": "Profile Info",
+        "Wishlist": "Wishlist",
+        "Support Tickets": "Support Ticket",
+        "Pending": "Pending",
+        "Delivered": "Delivered",
+        "Cancelled": "Canceled",
+        "Processing": "Processing"
     }
 }
