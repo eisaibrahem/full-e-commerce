@@ -51,7 +51,9 @@
         "exclusiveBrand": "All our new arrivals in a exclusive brand selection",
         "Selected Products": "Selected Products"
     },
-    "mainProducts": {},
+    "mainProducts": {
+        "addToCart": "Add To Cart"
+    },
     "productDetails": {
         "buyNow": "Buy Now"
     },

@@ -77,7 +77,7 @@ export default function RightDrawer({ setIsDrawerOpen, local }: any) {
         aria-label="Device settings"
         sx={{
           m: "0",
-          mb: 2,
+          mb: 1.5,
           py: "0",
           px: "0px",
           ".MuiListItem-root": { p: "0px" },
@@ -98,13 +98,7 @@ export default function RightDrawer({ setIsDrawerOpen, local }: any) {
         ))}
       </Stack>
 
-      <Stack
-        gap={2}
-        bottom={"10px"}
-        right={"10px"}
-        maxWidth={380}
-        width={"100%"}
-      >
+      <Stack gap={1.5} maxWidth={380} width={"100%"}>
         <Button
           variant="contained"
           color="error"

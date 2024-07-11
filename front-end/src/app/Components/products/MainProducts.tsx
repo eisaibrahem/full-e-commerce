@@ -121,17 +121,21 @@ export default function MainProducts({
                     onClick={() => {
                       // handleClickOpen();
                       // setclickedProduct(item);
-                      setDrawerData([
-                        ...drawerData,
-                        {
-                          title: item.attributes.productTitle,
-                          price: item.attributes.productPrice,
-                          image: `${item.attributes.productImage.data[0].attributes.url}`,
-                          count: 1,
-                        },
-                      ]);
+                      // setDrawerData([
+                      //   ...drawerData,
+                      //   {
+                      //     title: item.attributes.productTitle,
+                      //     price: item.attributes.productPrice,
+                      //     image: `${item.attributes.productImage.data[0].attributes.url}`,
+                      //     count: 1,
+                      //   },
+                      // ]);
                     }}
-                    sx={{ textTransform: "capitalize" }}
+                    sx={{
+                      textTransform: "capitalize",
+                      position: "relative",
+                      zIndex: 10,
+                    }}
                     size="large"
                   >
                     <AddShoppingCartOutlined sx={{ mr: 1 }} fontSize="small" />

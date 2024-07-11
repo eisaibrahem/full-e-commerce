@@ -18,9 +18,6 @@ export default function ProductsDetails({ clickedProduct, myDate }: any) {
   const { data, error, isLoading } = useGetProductByNameQuery(myDate);
   const [drawerData, setDrawerData] = useRecoilState(CartAtom);
 
-  const addToCart = () => {
-    setDrawerData([...drawerData, clickedProduct]);
-  };
   return error ? (
     <>{error}</>
   ) : (
@@ -139,7 +136,17 @@ export default function ProductsDetails({ clickedProduct, myDate }: any) {
 
           <Button
             onClick={() => {
-              addToCart();
+              setDrawerData([
+                ...drawerData,
+                {
+                  title: clickedProduct.attributes.productTitle,
+                  price: clickedProduct.attributes.productPrice,
+                  image:
+                    clickedProduct.attributes.productImage.data[0].attributes
+                      .url,
+                  count: 1,
+                },
+              ]);
             }}
             sx={{ mb: { xs: 1, sm: 0 }, textTransform: "capitalize" }}
             variant="contained"

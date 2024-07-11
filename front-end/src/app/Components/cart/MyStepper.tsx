@@ -11,6 +11,7 @@ import {
   stepConnectorClasses,
   Stepper,
   styled,
+  useTheme,
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -19,7 +20,7 @@ import { useRecoilState } from "recoil";
 import { Navigation } from "swiper/modules";
 
 export default function MyStepper({ local }: { local: string }) {
-  const [theme, colorMode] = useMode();
+  const theme = useTheme();
 
   const [steps, setSteps] = useRecoilState(stepsAtom);
   const [activeStep, setActiveStep] = useRecoilState(activeStepAtom);

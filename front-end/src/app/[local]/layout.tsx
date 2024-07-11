@@ -1,10 +1,9 @@
+// E:\Projects\web\e-commerce\front-end\src\app\[local]\layout.tsx
 import React from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import type { Metadata } from "next";
-import Footer from "../Components/footer/Footer";
-import { IntlProvider } from "next-intl";
-import Header from "../Components/header/Header";
+import RecoilProvider from "../RecoilProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
@@ -24,13 +23,9 @@ export default function LocaleLayout({
 }) {
   return (
     <html lang="en" style={{ backgroundColor: "#eee" }}>
-      {/* <IntlProvider messages={messages} locale={local}> */}
-      <body className={inter.className}>
-        {children}
-
-        <Footer />
+      <body className={inter.className} style={{ margin: "0" }}>
+        <RecoilProvider local={local}>{children}</RecoilProvider>
       </body>
-      {/* </IntlProvider> */}
     </html>
   );
 }

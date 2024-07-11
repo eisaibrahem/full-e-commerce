@@ -18,37 +18,13 @@ export default function Home({
 }: {
   params: { local: string };
 }) {
-  const [theme, colorMode] = useMode();
-
-  let messages;
-  try {
-    messages = require(`../../../messages/${local}.json`);
-  } catch (error) {
-    console.error(`Failed to load messages for locale ${local}`, error);
-    messages = {}; // Provide an empty object or a default set of messages
-  }
-
   return (
-    <RecoilRoot>
-      <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Provider store={store}>
-            {/* @ts-ignore */}
-            <IntlProvider messages={messages} locale={local}>
-              <Box>
-                <Header local={local} isCart={false} />
-                {/* @ts-ignore */}
-                <Box bgcolor={theme.palette.bgColor.main}>
-                  <Hero />
-                </Box>
-                <Products />
-                <ScrollToTop />
-              </Box>
-            </IntlProvider>
-          </Provider>
-        </ThemeProvider>
-      </ColorModeContext.Provider>
-    </RecoilRoot>
+    <>
+      <Box>
+        <Hero />
+      </Box>
+      <Products />
+      <ScrollToTop />
+    </>
   );
 }

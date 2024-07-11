@@ -24,19 +24,15 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const options = ["ar", "en"];
-export default function Header1({
-  local,
-  isCart,
-}: {
-  local: string;
-  isCart: boolean;
-}) {
+
+export default function Header1({ local }: { local: string }) {
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedIndex, setSelectedIndex] = useState(Number);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const open = Boolean(anchorEl);
 
   const handleClickListItem = (event: React.MouseEvent<HTMLElement>) => {
@@ -63,6 +59,8 @@ export default function Header1({
       colorMode.toggleColorMode();
     }
   }, [colorMode, theme.palette.mode]);
+
+  const pathname = usePathname();
 
   return (
     <Box
@@ -150,7 +148,11 @@ export default function Header1({
               {options.map((option, index) => (
                 <Link
                   key={option}
-                  href={isCart ? `/${option}/cart` : option}
+                  href={
+                    pathname.includes("/cart")
+                      ? `/${option}/cart`
+                      : `/${option}`
+                  }
                   onClick={(event) => handleMenuItemClick(event, index)}
                   style={{
                     textDecoration: "none",
