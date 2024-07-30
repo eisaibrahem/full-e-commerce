@@ -6,8 +6,7 @@ import Header from "./Components/header/Header";
 import { IntlProvider } from "next-intl";
 import { ColorModeContext, useMode } from "@/theme";
 import { Box, ScopedCssBaseline, ThemeProvider, useTheme } from "@mui/material";
-import { Provider } from "react-redux";
-import { store } from "@/Redux/store";
+
 import Footer from "./Components/footer/Footer";
 
 export default function RecoilProvider({
@@ -33,14 +32,12 @@ export default function RecoilProvider({
         <ThemeProvider theme={theme}>
           <ScopedCssBaseline />
           <IntlProvider messages={messages} locale={local}>
-            <Provider store={store}>
-              {/* @ts-ignore */}
-              <Box bgcolor={theme.palette.bgColor.main}>
-                <Header local={local} />
-                {children}
-                <Footer />
-              </Box>
-            </Provider>
+            {/* @ts-ignore */}
+            <Box bgcolor={theme.palette.bgColor.main}>
+              <Header local={local} />
+              {children}
+              <Footer />
+            </Box>
           </IntlProvider>
         </ThemeProvider>
       </ColorModeContext.Provider>

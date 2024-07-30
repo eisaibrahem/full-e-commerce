@@ -104,6 +104,157 @@ const ProductsAtom = atom<ProductItem[]>({
       count: 1,
       category: "women",
     },
+    {
+      id: "7",
+      title: "Light T-Shirt",
+      description:
+        "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      price: 20,
+      Images: [
+        "https://i.imgur.com/d7oblcR.jpg",
+        "https://i.imgur.com/28X8QlN.jpg",
+        "https://i.imgur.com/yycjhzl.jpg",
+      ],
+      rating: 3,
+      count: 1,
+      category: "man",
+    },
+    {
+      id: "8",
+      title: "Scatter T-Shirt",
+      description:
+        "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      price: 20,
+      Images: [
+        "https://i.imgur.com/ZIgl1K4.jpg",
+        "https://i.imgur.com/VhCZtaf.jpg",
+      ],
+      rating: 3,
+      count: 1,
+      category: "women",
+    },
+    {
+      id: "9",
+      title: "Handbag With Wallet",
+      description:
+        "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      price: 12,
+      Images: [
+        "https://i.imgur.com/Mu6dZ28.jpg",
+        "https://i.imgur.com/gNw45nT.jpg",
+        "https://i.imgur.com/ZnF2cUv.jpg",
+      ],
+      rating: 5,
+      count: 1,
+      category: "man",
+    },
+    {
+      id: "10",
+      title: "Light Dress",
+      description:
+        "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      price: 25,
+      Images: [
+        "https://i.imgur.com/xLqAsoY.jpg",
+        "https://i.imgur.com/0YMmJEN.jpg",
+      ],
+      rating: 3.5,
+      count: 1,
+      category: "women",
+    },
+    {
+      id: "11",
+      title: "Light Wallet",
+      description:
+        "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      price: 20,
+      Images: [
+        "https://i.imgur.com/7ii3QE6.jpg",
+        "https://i.imgur.com/zBNBAoK.jpg",
+        "https://i.imgur.com/xz5Ya8v.jpg",
+        "https://i.imgur.com/jle8VRl.jpg",
+        "https://i.imgur.com/WSIPpci.jpg",
+        "https://i.imgur.com/aaBV79z.jpg",
+      ],
+      rating: 3.5,
+      count: 1,
+      category: "women",
+    },
+    {
+      id: "12",
+      title: "Sleeping Dress",
+      description:
+        "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      price: 25,
+      Images: [
+        "https://i.imgur.com/oU3vHFj.jpeg",
+        "https://i.imgur.com/MxJeryU.jpeg",
+        "https://i.imgur.com/vJ4kLQA.jpeg",
+        "https://i.imgur.com/ch4sNu1.jpeg",
+        "https://i.imgur.com/Elnotey.jpeg",
+      ],
+      rating: 3.5,
+      count: 1,
+      category: "women",
+    },
+    {
+      id: "13",
+      title: "Bump Jacket",
+      description:
+        "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      price: 105,
+      Images: [
+        "https://i.imgur.com/vgYsVv6.jpeg",
+        "https://i.imgur.com/rAnpdSb.jpeg",
+      ],
+      rating: 4.5,
+      count: 1,
+      category: "man",
+    },
+    {
+      id: "14",
+      title: "Small Dress",
+      description:
+        "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      price: 15,
+      Images: [
+        "https://i.imgur.com/o22s4WS.jpeg",
+        "https://i.imgur.com/OpAgK0h.jpeg",
+        "https://i.imgur.com/VwwhxH5.jpeg",
+      ],
+      rating: 4.5,
+      count: 1,
+      category: "women",
+    },
+    {
+      id: "15",
+      title: "T-Shirt With Sleeve",
+      description:
+        "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      price: 18,
+      Images: [
+        "https://i.imgur.com/qarIzpZ.jpeg",
+        "https://i.imgur.com/8ZS6mKz.jpeg",
+        "https://i.imgur.com/iOfkGVO.jpeg",
+      ],
+      rating: 4.5,
+      count: 1,
+      category: "man",
+    },
+    {
+      id: "16",
+      title: "jeans Dress",
+      description:
+        "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      price: 35,
+      Images: [
+        "https://i.imgur.com/JFqU9hL.jpeg",
+        "https://i.imgur.com/3egdEVP.jpeg",
+      ],
+      rating: 4.0,
+      count: 1,
+      category: "women",
+    },
   ],
 });
 
@@ -125,5 +276,12 @@ export const checkedProductsAtom = atom<ProductItem>({
     category: "",
   },
 });
+
+export const currentPageAtom = atom({
+  key: "currentPage",
+  default: 1,
+});
+
+export const productsPerPage = 9;
 
 export default ProductsAtom;
