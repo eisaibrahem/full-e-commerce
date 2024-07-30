@@ -1,5 +1,5 @@
 // src/components/MyListItem.tsx
-import { CartItem } from "@/atoms/cart-atom";
+import { CartItem } from "@/atoms/cartAtoms";
 import { Add, Close, Remove } from "@mui/icons-material";
 import {
   Box,

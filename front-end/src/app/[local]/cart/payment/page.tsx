@@ -17,7 +17,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import { totalAtom } from "@/atoms/cart-atom";
+import { totalAtom } from "@/atoms/cartAtoms";
 import { useRecoilState } from "recoil";
 import Link from "next/link";
 import {

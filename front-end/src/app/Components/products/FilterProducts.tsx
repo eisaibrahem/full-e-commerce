@@ -1,4 +1,5 @@
 "use client";
+import ProductsAtom from "@/atoms/productsAtoms";
 import {
   Box,
   Stack,
@@ -9,34 +10,37 @@ import {
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
+import { useRecoilState } from "recoil";
 
-export default function FilterProducts({ myDate, setmyDate }: any) {
+export default function FilterProducts({
+  fillteredProducts,
+  setFillteredProducts,
+}: any) {
   const theme = useTheme();
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [productsData] = useRecoilState(ProductsAtom); // Read-only
+
   const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
     newValue: string
   ) => {
     if (newValue !== null) {
-      setmyDate(newValue);
+      setSelectedCategory(newValue);
+
+      // Filter products based on selected category
+      const filteredProducts =
+        newValue === ""
+          ? productsData // Show all products
+          : productsData.filter(
+              (product: any) => product.category === newValue
+            );
+
+      setFillteredProducts(filteredProducts); // Update state with filtered products
     }
   };
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const allProductsAPI = "products?populate=*";
-  const menCategoryAPI =
-    "products?populate=*&filters[productCategory][$eq]=men";
-  const womenCategoryAPI =
-    "products?populate=*&filters[productCategory][$eq]=women";
   const t = useTranslations("filter");
+
   return (
     <Stack
       direction={"row"}
@@ -54,7 +58,7 @@ export default function FilterProducts({ myDate, setmyDate }: any) {
 
       <ToggleButtonGroup
         color="error"
-        value={myDate}
+        value={selectedCategory}
         exclusive
         onChange={handleAlignment}
         aria-label="text alignment"
@@ -71,8 +75,8 @@ export default function FilterProducts({ myDate, setmyDate }: any) {
         <ToggleButton
           sx={{ color: theme.palette.text.primary }}
           className="myButton"
-          value={allProductsAPI}
-          aria-label="left aligned"
+          value=""
+          aria-label="all products"
         >
           {t("allProducts")}
         </ToggleButton>
@@ -80,19 +84,19 @@ export default function FilterProducts({ myDate, setmyDate }: any) {
         <ToggleButton
           sx={{ color: theme.palette.text.primary }}
           className="myButton"
-          value={menCategoryAPI}
-          aria-label="centered"
+          value="women"
+          aria-label="women category"
         >
-          {t("menCategory")}
+          {t("womenCategory")}
         </ToggleButton>
 
         <ToggleButton
           sx={{ color: theme.palette.text.primary }}
           className="myButton"
-          value={womenCategoryAPI}
-          aria-label="right aligned"
+          value="man"
+          aria-label="men category"
         >
-          {t("womenCategory")}
+          {t("menCategory")}
         </ToggleButton>
       </ToggleButtonGroup>
     </Stack>

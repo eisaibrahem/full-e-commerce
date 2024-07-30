@@ -5,9 +5,14 @@ import FilterProducts from "./FilterProducts";
 import MainProducts from "./MainProducts";
 import { Close } from "@mui/icons-material";
 import ProductsDetails from "./ProductsDetails";
+import { useRecoilState } from "recoil";
+import ProductsAtom from "@/atoms/productsAtoms";
 
 export default function Products() {
   const [open, setOpen] = useState(false);
+  const [clickedProduct, setClickedProduct] = useState({});
+  const [productsData] = useRecoilState(ProductsAtom); // Read-only
+  const [fillteredProducts, setFillteredProducts] = useState(productsData);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -17,18 +22,18 @@ export default function Products() {
     setOpen(false);
   };
 
-  const [clickedProduct, setclickedProduct] = useState({});
-  const allProductsAPI = "products?populate=*";
-
-  const [myDate, setmyDate] = useState(allProductsAPI);
   return (
     <Container sx={{ py: 9 }}>
-      <FilterProducts myDate={myDate} setmyDate={setmyDate} />
+      <FilterProducts
+        fillteredProducts={fillteredProducts}
+        setFillteredProducts={setFillteredProducts}
+      />
       <MainProducts
         setOpen={setOpen}
-        setclickedProduct={setclickedProduct}
+        setClickedProduct={setClickedProduct}
         clickedProduct={clickedProduct}
-        myDate={myDate}
+        myDate={productsData}
+        fillteredProducts={fillteredProducts} // Pass filtered products
       />
       <Dialog
         sx={{
@@ -55,7 +60,7 @@ export default function Products() {
           <Close fontSize="small" />
         </IconButton>
 
-        <ProductsDetails clickedProduct={clickedProduct} myDate={myDate} />
+        <ProductsDetails />
       </Dialog>
     </Container>
   );

@@ -1,5 +1,5 @@
 "use client";
-import CartAtom from "@/atoms/cart-atom";
+import CartAtom from "@/atoms/cartAtoms";
 import { Add, Close, Remove, ShoppingCart } from "@mui/icons-material";
 import {
   Box,

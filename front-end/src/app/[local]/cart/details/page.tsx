@@ -1,5 +1,5 @@
 "use client";
-import { totalAtom } from "@/atoms/cart-atom";
+import { totalAtom } from "@/atoms/cartAtoms";
 import {
   activeStepAtom,
   completedStepsAtom,

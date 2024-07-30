@@ -1,6 +1,7 @@
+// next.config.mjs
 import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
-// next.config.mjs
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -13,6 +14,11 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "i.imgur.com",
         pathname: "/**",
       },
     ],

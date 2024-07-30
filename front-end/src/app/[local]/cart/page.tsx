@@ -16,7 +16,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
-import CartAtom, { CartItem, totalAtom } from "@/atoms/cart-atom";
+import CartAtom, { CartItem, totalAtom } from "@/atoms/cartAtoms";
 import {
   activeStepAtom,
   completedStepsAtom,
