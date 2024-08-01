@@ -39,16 +39,14 @@ export default function ProductsDetails() {
 
       <Box
         sx={{
+          display: "flex",
+          flexDirection: "column",
           py: 1,
           textAlign: { sm: "left" },
           width: { xs: "100%", md: "50%" },
         }}
       >
-        <Stack
-          justifyContent={"space-between"}
-          direction={"row"}
-          alignContent={"center"}
-        >
+        <Stack justifyContent={"space-between"} direction={"row"}>
           <Typography variant="h5">{clickedProduct.title}</Typography>
           <Typography my={0.4} fontSize={"22px"} color={"crimson"} variant="h5">
             ${clickedProduct.price}
@@ -125,8 +123,9 @@ export default function ProductsDetails() {
           }}
           sx={{
             mb: { xs: 1, sm: 0 },
+
             textTransform: "capitalize",
-            mx: { xs: "auto", sm: 0 },
+            alignSelf: { xs: "center", sm: "flex-start" },
           }}
           variant="contained"
         >

@@ -38,8 +38,8 @@ export default function Products({ local }: any) {
       <Dialog
         sx={{
           ".MuiBackdrop-root": {
-            backdropFilter: "blur(8px)", // Apply the blur effect
-            backgroundColor: "rgba(0, 0, 0, 0.5)", // Optional: Add a semi-transparent background
+            backdropFilter: "blur(10px)", // Apply the blur effect
+            backgroundColor: "rgba(0, 0, 0, 0.7)", // Optional: Add a semi-transparent background
           },
           ".MuiPaper-root": { minWidth: { xs: "100%", md: 800 } },
           overflow: "hidden",
@@ -49,15 +49,21 @@ export default function Products({ local }: any) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
+        {/* gg */}
         <IconButton
           sx={{
+            bgcolor: "rgba(245, 185, 185, 0.5)",
             transition: "0.3s",
             rotate: "0deg",
             position: "absolute",
             p: 0.5,
             top: 4,
             right: 6,
-            "&:hover": { color: "red", rotate: "90deg" },
+            "&:hover": {
+              color: "red",
+              rotate: "90deg",
+              bgcolor: "rgba(255, 0, 0, 0.3)",
+            },
           }}
           onClick={handleClose}
         >
