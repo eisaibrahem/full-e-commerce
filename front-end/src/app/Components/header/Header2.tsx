@@ -236,9 +236,7 @@ export default function Header2({ local }: { local: string }) {
             sx={{
               overflow: "hidden",
               ".MuiDrawer-paper": {
-                width: 400,
-                height: "100%",
-                borderRadius: "0 0 6px 6px",
+                maxWidth: 400,
                 overflow: "hidden",
               },
               ".MuiStack-root": {
@@ -246,17 +244,7 @@ export default function Header2({ local }: { local: string }) {
               },
             }}
           >
-            <Stack
-              sx={{
-                py: 3,
-                alignItems: "center",
-                bgcolor: bgSelector,
-                position: "relative",
-                borderRadius: "0 0 6px 6px",
-              }}
-            >
-              <RightDrawer setIsDrawerOpen={setIsDrawerOpen} local={local} />
-            </Stack>
+            <RightDrawer setIsDrawerOpen={setIsDrawerOpen} local={local} />
           </Drawer>
 
           <IconButton aria-label="cart">

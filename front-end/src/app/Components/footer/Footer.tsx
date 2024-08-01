@@ -16,22 +16,20 @@ export default function Footer() {
         alignItems={"center"}
         color={"HighlightText"}
         variant="h6"
-        sx={{ fontSize: 18 }}
+        sx={{ fontSize: 18, flexWrap: "wrap", gap: 1 }}
       >
         Designed and developed by
-        <Button
+        <Box
           sx={{
             mx: 0.5,
             fontSize: "18px",
             textTransform: "capitalize",
             color: "#ff7790",
           }}
-          variant="text"
           color="primary"
         >
-          Eisa Ibrahem
-        </Button>
-        ©2024
+          Eisa Ibrahem ©2024
+        </Box>
       </Typography>
     </Box>
   );

@@ -18,6 +18,7 @@ import {
   Chip,
   IconButton,
   Pagination,
+  useTheme,
 } from "@mui/material";
 import {
   ShoppingBag as OrderIcon,
@@ -36,14 +37,7 @@ import {
 } from "@/atoms/stepperAtoms";
 import { useTranslations } from "next-intl";
 
-interface Order {
-  id: string;
-  status: "Pending" | "Processing" | "Delivered" | "Cancelled";
-  date: string;
-  amount: number;
-}
-
-const orders: Order[] = [
+const orders = [
   {
     id: "f0ba538b-c8f3-45ce",
     status: "Pending",
@@ -76,93 +70,64 @@ const orders: Order[] = [
   },
 ];
 
-const activeStep = Number(localStorage.getItem("activeStep"));
 const OrdersPage: NextPage = () => {
   const [steps, setSteps] = useRecoilState(stepsAtom);
   const [activeStep, setActiveStep] = useRecoilState(activeStepAtom);
   const [completed, setCompleted] = useRecoilState(completedStepsAtom);
 
-  const totalSteps = () => {
-    return steps.length;
-  };
-
-  const completedSteps = () => {
-    return Object.keys(completed).length;
-  };
-
-  const isLastStep = () => {
-    return activeStep === totalSteps() - 1;
-  };
-  const allStepsCompleted = () => {
-    return completedSteps() === totalSteps();
-  };
-
   useEffect(() => {
     setActiveStep(3);
     localStorage.setItem("activeStep", "3");
   }, []);
+
   const t = useTranslations("cart");
+  const theme = useTheme();
+
+  const renderListItem = (icon: any, text: string, count: number) => (
+    <ListItem button>
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText primary={text} sx={{ color: theme.palette.text.primary }} />
+      <Typography sx={{ color: theme.palette.text.secondary }}>
+        {count}
+      </Typography>
+    </ListItem>
+  );
+
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}>
       {/* Sidebar */}
-      <Box sx={{ width: 250, bgcolor: "background.paper" }}>
-        <Typography variant="h6" sx={{ p: 2 }}>
+      <Box sx={{ width: { xs: "100%", md: 250 }, bgcolor: "background.paper" }}>
+        <Typography
+          variant="h6"
+          sx={{ p: 2, color: theme.palette.text.primary }}
+        >
           {t("DASHBOARD")}
         </Typography>
         <List>
-          <ListItem button selected>
-            <ListItemIcon>
-              <OrderIcon color="error" />
-            </ListItemIcon>
-            <ListItemText primary={t("Orders")} />
-            <Typography>5</Typography>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <WishlistIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("Wishlist")} />
-            <Typography>19</Typography>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <SupportIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("Support Tickets")} />
-            <Typography>1</Typography>
-          </ListItem>
+          {renderListItem(<OrderIcon color="error" />, t("Orders"), 5)}
+          {renderListItem(<WishlistIcon />, t("Wishlist"), 19)}
+          {renderListItem(<SupportIcon />, t("Support Tickets"), 1)}
         </List>
-        <Typography variant="h6" sx={{ p: 2 }}>
+        <Typography
+          variant="h6"
+          sx={{ p: 2, color: theme.palette.text.primary }}
+        >
           {t("ACCOUNT SETTINGS")}
         </Typography>
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <ProfileIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("Profile Info")} />
-            <Typography>3</Typography>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <AddressIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("Addresses")} />
-            <Typography>16</Typography>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <PaymentIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("Payment Methods")} />
-            <Typography>4</Typography>
-          </ListItem>
+          {renderListItem(<ProfileIcon />, t("Profile Info"), 3)}
+          {renderListItem(<AddressIcon />, t("Addresses"), 16)}
+          {renderListItem(<PaymentIcon />, t("Payment Methods"), 4)}
         </List>
       </Box>
 
       {/* Main content */}
       <Box sx={{ flexGrow: 1, p: 3 }}>
-        <Typography variant="h4" gutterBottom>
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{ color: theme.palette.text.primary }}
+        >
           <OrderIcon color="error" sx={{ mr: 1, verticalAlign: "middle" }} />
           {t("My Orders")}
         </Typography>

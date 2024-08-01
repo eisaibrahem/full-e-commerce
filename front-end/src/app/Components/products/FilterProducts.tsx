@@ -12,10 +12,7 @@ import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 
-export default function FilterProducts({
-  fillteredProducts,
-  setFillteredProducts,
-}: any) {
+export default function FilterProducts({ setFillteredProducts, local }: any) {
   const theme = useTheme();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [productsData] = useRecoilState(ProductsAtom); // Read-only
@@ -43,15 +40,21 @@ export default function FilterProducts({
 
   return (
     <Stack
-      direction={"row"}
+      direction={local === "ar" ? "row-reverse" : "row"}
       alignItems={"center"}
       justifyContent={"space-between"}
       flexWrap={"wrap"}
       gap={3}
     >
-      <Box>
-        <Typography variant="h6">{t("Selected Products")}</Typography>
-        <Typography fontWeight={300} variant="body1">
+      <Box sx={{ textAlign: local === "ar" ? "end" : "start" }}>
+        <Typography variant="h6" color={theme.palette.text.primary}>
+          {t("Selected Products")}
+        </Typography>
+        <Typography
+          fontWeight={300}
+          color={theme.palette.text.secondary}
+          variant="body1"
+        >
           {t("exclusiveBrand")}
         </Typography>
       </Box>

@@ -8,7 +8,7 @@ import ProductsDetails from "./ProductsDetails";
 import { useRecoilState } from "recoil";
 import ProductsAtom from "@/atoms/productsAtoms";
 
-export default function Products() {
+export default function Products({ local }: any) {
   const [open, setOpen] = useState(false);
   const [clickedProduct, setClickedProduct] = useState({});
   const [productsData] = useRecoilState(ProductsAtom); // Read-only
@@ -25,7 +25,7 @@ export default function Products() {
   return (
     <Container sx={{ py: 9 }}>
       <FilterProducts
-        fillteredProducts={fillteredProducts}
+        local={local}
         setFillteredProducts={setFillteredProducts}
       />
       <MainProducts
@@ -37,6 +37,10 @@ export default function Products() {
       />
       <Dialog
         sx={{
+          ".MuiBackdrop-root": {
+            backdropFilter: "blur(8px)", // Apply the blur effect
+            backgroundColor: "rgba(0, 0, 0, 0.5)", // Optional: Add a semi-transparent background
+          },
           ".MuiPaper-root": { minWidth: { xs: "100%", md: 800 } },
           overflow: "hidden",
         }}

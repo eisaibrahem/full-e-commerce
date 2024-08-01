@@ -28,7 +28,7 @@ const mySlider = [
   { text: "MEN", link: "/assets/images/banner-15.jpg" },
   { text: "WOMEN", link: "/assets/images/banner-25.jpg" },
 ];
-export default function Hero() {
+export default function Hero({ local }: { local: string }) {
   const t = useTranslations("hero");
   const theme = useTheme();
 
@@ -72,10 +72,12 @@ export default function Hero() {
                 />
                 <Box
                   sx={{
+                    display: "flex",
+                    flexDirection: "column",
                     [theme.breakpoints.up("sm")]: {
                       position: "absolute",
                       left: "10%",
-                      textAlign: "left",
+                      alignItems: local === "ar" ? "end" : "start",
                       ":hover": {
                         cursor: "grab",
                       },
@@ -93,6 +95,7 @@ export default function Hero() {
                   <Typography
                     sx={{
                       color: "#222",
+                      fontSize: { xs: 22, sm: 26 },
                     }}
                     variant="h5"
                   >
@@ -104,6 +107,8 @@ export default function Hero() {
                       color: "#222",
                       fontWeight: 500,
                       my: 1,
+
+                      fontSize: { xs: 32, sm: 38 },
                     }}
                     variant="h3"
                   >
@@ -114,13 +119,27 @@ export default function Hero() {
                     sx={{
                       justifyContent: { xs: "center", sm: "left" },
                     }}
-                    direction={"row"}
+                    direction={local === "ar" ? "row-reverse" : "row"}
+                    gap={1}
                     alignItems={"center"}
                   >
-                    <Typography color={"#333"} mr={1} variant="h4">
+                    <Typography
+                      color={"#333"}
+                      mr={1}
+                      variant="h4"
+                      sx={{
+                        fontSize: { xs: 22, sm: 28 },
+                      }}
+                    >
                       {t("saleUpTo")}
                     </Typography>
-                    <Typography color={"#D23F57"} variant="h4">
+                    <Typography
+                      color={"#D23F57"}
+                      variant="h4"
+                      sx={{
+                        fontSize: { xs: 22, sm: 28 },
+                      }}
+                    >
                       {t("30%OFF")}
                     </Typography>
                   </Stack>
@@ -129,6 +148,7 @@ export default function Hero() {
                       color: "#000",
                       fontWeight: 300,
                       my: 1,
+                      fontSize: { xs: 14, sm: 18 },
                     }}
                     variant="body1"
                   >
@@ -151,7 +171,7 @@ export default function Hero() {
                     }}
                     variant="contained"
                   >
-                    {t("shopNow")}
+                    {t("shop now")}
                   </Button>
                 </Box>
               </SwiperSlide>

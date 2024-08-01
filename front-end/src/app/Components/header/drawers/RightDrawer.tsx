@@ -10,6 +10,7 @@ import {
   ListItem,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -46,20 +47,29 @@ export default function RightDrawer({ setIsDrawerOpen, local }: any) {
   const removeItem = (index: number) => {
     setDrawerData((prevData) => prevData.filter((_, i) => i !== index));
   };
-
+  const theme = useTheme();
   return (
     <Box
-      py={1}
-      px={0}
-      position={"relative"}
-      height={"100vh"}
+      height={"100%"}
       overflow={"hidden"}
+      width={"100%"}
+      sx={{
+        pt: 3,
+        pb: 2,
+        px: 2,
+
+        display: "flex",
+        flexDirection: "column",
+
+        // @ts-ignore
+        bgcolor: theme.palette.backgroundSelector.main,
+        borderRadius: "6px",
+      }}
     >
       <Stack
         direction={"row"}
         justifyContent={"space-between"}
         alignItems={"center"}
-        width={360}
       >
         <Stack direction={"row"} gap={2} alignItems={"center"}>
           <ShoppingCart />
@@ -76,15 +86,9 @@ export default function RightDrawer({ setIsDrawerOpen, local }: any) {
         component="nav"
         aria-label="Device settings"
         sx={{
-          m: "0",
           mb: 1.5,
-          py: "0",
-          px: "0px",
-          ".MuiListItem-root": { p: "0px" },
-          // @ts-ignore
-          background: "backgroundSelector.main",
-          height: "72%",
           overflow: "auto",
+          flexGrow: 1,
         }}
       >
         {drawerData.map((item, index) => (
@@ -98,7 +102,7 @@ export default function RightDrawer({ setIsDrawerOpen, local }: any) {
         ))}
       </Stack>
 
-      <Stack gap={1.5} maxWidth={380} width={"100%"}>
+      <Stack gap={1.5}>
         <Button
           variant="contained"
           color="error"

@@ -61,7 +61,10 @@ export default function Header3() {
 
   const drawerList = () =>
     drowerData.map((item, index) => (
-      <Accordion key={index} sx={{ bgcolor: bgSelector, width: "90%", py: 0 }}>
+      <Accordion
+        key={index}
+        sx={{ bgcolor: bgSelector, width: "90%", py: 0, mt: 1 }}
+      >
         <AccordionSummary
           expandIcon={<ExpandMore />}
           aria-controls="panel1-content"
@@ -170,7 +173,8 @@ export default function Header3() {
         >
           <Stack
             sx={{
-              py: 3,
+              pt: 4,
+              pb: 2,
               alignItems: "center",
               bgcolor: bgSelector,
               position: "relative",
@@ -184,6 +188,7 @@ export default function Header3() {
                 right: 5,
                 p: 0.3,
                 m: 0,
+
                 transition: "all 0.3s ease",
                 "&:hover": { color: "red", transform: "rotate(90deg)" },
               }}

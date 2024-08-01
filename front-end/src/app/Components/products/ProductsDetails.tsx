@@ -1,23 +1,19 @@
 "use client";
 import { AddShoppingCartOutlined } from "@mui/icons-material";
-import { Box, Button, Skeleton, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Image from "next/image";
 import { useState } from "react";
-import Loading from "../loading/Loading";
-import { useGetProductByNameQuery } from "@/Redux/Product";
 import { useTranslations } from "next-intl";
 import { useRecoilState } from "recoil";
 import CartAtom from "@/atoms/cartAtoms";
 import ProductsAtom, { checkedProductsAtom } from "@/atoms/productsAtoms";
 
-const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE;
 export default function ProductsDetails() {
   const [selectedImg, setSelectedImg] = useState(0);
   const t = useTranslations("productDetails");
   const [drawerData, setDrawerData] = useRecoilState(CartAtom);
-  const [productsData, setProductsData] = useRecoilState(ProductsAtom);
   const [clickedProduct, setClickedProduct] =
     useRecoilState(checkedProductsAtom);
 
@@ -28,35 +24,36 @@ export default function ProductsDetails() {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        gap: 2,
+        gap: 1,
         flexDirection: { xs: "column", md: "row" },
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-        }}
-      >
-        <Image
-          width={360}
-          height={360}
-          className="dialog-img"
-          src={`${clickedProduct.Images[selectedImg]}`}
-          alt=""
-        />
-      </Box>
+      <Image
+        width={300}
+        height={280}
+        style={{ width: "300px", height: "280px" }}
+        className="dialog-img"
+        src={`${clickedProduct.Images[selectedImg]}`}
+        alt={clickedProduct.title}
+      />
 
       <Box
         sx={{
-          py: 2,
-          textAlign: { xs: "center", sm: "left" },
+          py: 1,
+          textAlign: { sm: "left" },
           width: { xs: "100%", md: "50%" },
         }}
       >
-        <Typography variant="h5">{clickedProduct.title}</Typography>
-        <Typography my={0.4} fontSize={"22px"} color={"crimson"} variant="h6">
-          ${clickedProduct.price}
-        </Typography>
+        <Stack
+          justifyContent={"space-between"}
+          direction={"row"}
+          alignContent={"center"}
+        >
+          <Typography variant="h5">{clickedProduct.title}</Typography>
+          <Typography my={0.4} fontSize={"22px"} color={"crimson"} variant="h5">
+            ${clickedProduct.price}
+          </Typography>
+        </Stack>
         <Typography variant="body1">{clickedProduct.description}</Typography>
 
         <Stack
@@ -65,56 +62,52 @@ export default function ProductsDetails() {
               xs: "center",
               sm: "left",
             },
-            overflow: "auto",
           }}
           direction={"row"}
           gap={1}
           my={1.5}
+          mx={0.5}
         >
           <ToggleButtonGroup
             value={selectedImg}
             exclusive
             sx={{
+              gap: 2,
+              // width: "100%",
+              overflow: "auto",
               ".Mui-selected": {
                 border: "1px solid royalblue !important",
                 borderRadius: "5px !important",
                 opacity: "1",
                 backgroundColor: "initial",
-                overflow: "auto",
                 mb: 0.8,
               },
             }}
           >
-            {clickedProduct.Images.map((item: any, index: any) => {
-              return (
-                <ToggleButton
-                  key={item.id}
-                  value={index}
-                  sx={{
-                    width: "110px",
-                    height: "110px",
-                    mx: 1,
-                    p: "0",
-                    opacity: "0.5",
+            {clickedProduct.Images.map((item: any, index: any) => (
+              <ToggleButton
+                key={index}
+                value={index}
+                sx={{
+                  width: "110px",
+                  height: "110px",
+                  m: 0,
+                  p: 0,
+                  opacity: 0.5,
+                }}
+                onClick={() => setSelectedImg(index)}
+              >
+                <Image
+                  style={{
+                    borderRadius: 3,
                   }}
-                >
-                  <Image
-                    onClick={() => {
-                      setSelectedImg(index);
-                    }}
-                    style={{
-                      borderRadius: 3,
-                      width: "100%",
-                      height: "100%",
-                    }}
-                    height={500}
-                    width={500}
-                    src={`${item}`}
-                    alt=""
-                  />
-                </ToggleButton>
-              );
-            })}
+                  height={110}
+                  width={110}
+                  src={item}
+                  alt={clickedProduct.title}
+                />
+              </ToggleButton>
+            ))}
           </ToggleButtonGroup>
         </Stack>
 
@@ -130,7 +123,11 @@ export default function ProductsDetails() {
               },
             ]);
           }}
-          sx={{ mb: { xs: 1, sm: 0 }, textTransform: "capitalize" }}
+          sx={{
+            mb: { xs: 1, sm: 0 },
+            textTransform: "capitalize",
+            mx: { xs: "auto", sm: 0 },
+          }}
           variant="contained"
         >
           <AddShoppingCartOutlined sx={{ mr: 1 }} fontSize="small" />
